@@ -1,0 +1,36 @@
+﻿<Window x:Class="test.AllStudents"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:test"
+        mc:Ignorable="d"
+        Title="AllStudents" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="textboxSearchName" Margin="89,12,0,0" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="114" TextChanged="TextBox_TextChanged" Text="{Binding Name}">
+        </TextBox>
+        <Button x:Name="buttonRefresh" Click="Button_Click" Margin="17,7,0,0" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="50">
+            refresh
+        </Button>
+        <ListView x:Name="TestViewStudents"  HorizontalContentAlignment="Stretch"
+                MinWidth="80"  MinHeight="25" Margin="0,41,0,0" MouseDoubleClick="TestViewStudents_MouseDoubleClick"  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="40"/>
+                    <GridViewColumn Header="RoomId" DisplayMemberBinding="{Binding RoomId}" Width="50"/>
+                    <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding Surname}" Width="60"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="60"/>
+                    <GridViewColumn Header="Patronymic" DisplayMemberBinding="{Binding Patronymic}" Width="100"/>
+                    <GridViewColumn Header="Home Address" DisplayMemberBinding="{Binding Home_Address}" Width="100"/>
+                    <GridViewColumn Header="Status learning" DisplayMemberBinding="{Binding Status_learning}" Width="100"/>
+                    <GridViewColumn Header="Form education" DisplayMemberBinding="{Binding Form_of_education}" Width="110"/>
+                    <GridViewColumn Header="Status_residence" DisplayMemberBinding="{Binding Status_residence}" Width="60"/>
+                    <GridViewColumn Header="Id_group" DisplayMemberBinding="{Binding Id_group}" Width="55"/>
+                    <GridViewColumn Header="Id_parents" DisplayMemberBinding="{Binding Id_parents}" Width="55"/>
+
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
