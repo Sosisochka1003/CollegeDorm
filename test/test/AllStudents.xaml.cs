@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace test
         public AllStudents()
         {
             InitializeComponent();
+            using (var context = new DormContext())
+            {
+                var gr = context.Group.ToList();
+                foreach (var group in gr)
+                {
+                    combobox.Items.Add(group.Id);
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,26 +44,44 @@ namespace test
                 TestViewStudents.ItemsSource = stud;
                 
             }
+            MessageBox.Show(combobox.Text);
         }
 
         private void TestViewStudents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Student selectedItem = (Student)TestViewStudents.SelectedItem;
-            MessageBox.Show(selectedItem.Name);
         }
 
         public ObservableCollection<Student> FilteredItems { get; set; } = new ObservableCollection<Student>();
+        //public ObservableCollection<Group> GFilteredItems { get; set; } = new ObservableCollection<Group>();
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string filterText = ((TextBox)sender).Text.ToLower();
             using (var context = new DormContext())
             {
-                var klem = context.Students.Where(s => s.Name.ToLower().Contains(filterText)).ToList();
+                var klem = context.Students.Where(s => 
+                                                    s.Name.ToLower().Contains(filterText) ||
+                                                    s.Surname.ToLower().Contains(filterText) ||
+                                                    s.Patronymic.ToLower().Contains(filterText))
+                                                .ToList();
                 FilteredItems.Clear();
                 TestViewStudents.ItemsSource = klem;
             }
         }
+
+        private void combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string filterText = e.AddedItems[0].ToString();
+            using (var context = new DormContext())
+            {
+                var klem = context.Students.Where(s => s.Id_group.ToString().Contains(filterText)).ToList();
+                //GFilteredItems.Clear();
+                TestViewStudents.ItemsSource = klem;
+            }
+        }
+
+
     }
 
 }
