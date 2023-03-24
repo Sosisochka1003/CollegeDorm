@@ -13,19 +13,19 @@ namespace test
     {
         public class DormContext : DbContext
         {
-            public DbSet<Student> Students { get; set; }
             public DbSet<Dormitory> Dormitory { get; set; }
-            public DbSet<Room> Room { get; set; }
-            //public DbSet<Document> Documents { get; set; }
-            //public DbSet<Furniture_in_the_room> Furniture_In_The_Room { get; set; }
-            public DbSet<Group> Group { get; set; }
-            //public DbSet<Hard_inventory> Hard_Inventory { get; set; }
-            //public DbSet<List_of_document> List_if_document { get; set; }
-            public DbSet<Parents> Parents { get; set; }
-            //public DbSet<Soft_inventory> Soft_inventory { get; set; }
+            public DbSet<SoftInventory> SoftInventory { get; set; }
+            public DbSet<Document> Document { get; set; }
             public DbSet<Speciality> Speciality { get; set; }
-            //public DbSet<Student_soft_stock> Student_Soft_Stock { get; set; }
-
+            public DbSet<Group> Group { get; set; }
+            public DbSet<Parents> Parents { get; set; }
+            public DbSet<StudentSoftStock> StudentSoftStock { get; set; }
+            public DbSet<ListOfDocument> ListOfDocument { get; set; }
+            public DbSet<Room> Room { get; set; }
+            public DbSet<Student> Student { get; set; }
+            public DbSet<FurnitureInTheRoom> FurnitureInTheRoom { get; set; }
+            public DbSet<HardInventory> HardInventory { get; set; }
+            
             public DormContext()
             {
                 Database.EnsureCreated();
@@ -40,8 +40,7 @@ namespace test
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
-
-
+                
                 //modelBuilder.Entity<Student>()
                 //    .HasOne(s => s.Room)
                 //    .WithMany(r => r.Students)
@@ -70,7 +69,7 @@ namespace test
                     RoomId = roomId
                 };
 
-                context.Students.Add(student);
+                context.Student.Add(student);
                 context.SaveChanges();
             }
         }
@@ -94,7 +93,7 @@ namespace test
         {
             using (var context = new DormContext())
             {
-                var students = context.Students.Include(s => s.Room).ToList();
+                var students = context.Student.Include(s => s.Room).ToList();
                 MessageBox.Show("Students:");
                 foreach (var student in students)
                 {

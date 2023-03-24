@@ -40,7 +40,7 @@ namespace test
         {
             using (var context = new DormContext())
             {
-                var stud = context.Students.ToList();
+                var stud = context.Student.ToList();
                 TestViewStudents.ItemsSource = stud;
                 
             }
@@ -60,7 +60,7 @@ namespace test
             string filterText = ((TextBox)sender).Text.ToLower();
             using (var context = new DormContext())
             {
-                var klem = context.Students.Where(s => 
+                var klem = context.Student.Where(s => 
                                                     s.Name.ToLower().Contains(filterText) ||
                                                     s.Surname.ToLower().Contains(filterText) ||
                                                     s.Patronymic.ToLower().Contains(filterText))
@@ -75,8 +75,8 @@ namespace test
             string filterText = e.AddedItems[0].ToString();
             using (var context = new DormContext())
             {
-                var klem = context.Students.Where(s => s.Id_group.ToString().Contains(filterText)).ToList();
-                //GFilteredItems.Clear();
+                var klem = context.Student.Where(s => s.GroupId.ToString().Contains(filterText)).ToList();
+                FilteredItems.Clear();
                 TestViewStudents.ItemsSource = klem;
             }
         }

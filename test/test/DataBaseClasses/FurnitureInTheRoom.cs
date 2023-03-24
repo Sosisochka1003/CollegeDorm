@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace test.DataBaseClasses
 {
-    public class Group
+    public class FurnitureInTheRoom
     {
         [Key]
         public int Id { get; set; }
-        public string Number { get; set; }
-        [ForeignKey("Speciality")]
-        public int SpecialityId { get; set; }
-        public Speciality Speciality { get; set; }
+        [ForeignKey("HardInventory")]
+        public int Id_Hard_Inventory { get; set; }
+        public HardInventory HardInventory { get; set; }
+        [ForeignKey("Room")]
+        public int Id_room { get; set; }
+        public Room Room { get; set; }
     }
 }

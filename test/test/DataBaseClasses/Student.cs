@@ -25,10 +25,10 @@ namespace test.DataBaseClasses
         public string Form_of_education { get; set; }
         public string Status_residence { get; set; }
         [ForeignKey("Group")]
-        public int Id_group { get; set; }
+        public int GroupId { get; set; }
         public Group Group { get; set; }
         [ForeignKey("Parents")]
-        public int Id_parents { get; set; }
+        public int ParentsId { get; set; }
         public Parents Parents { get; set; }
 
     }
