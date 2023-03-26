@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:test"
         mc:Ignorable="d"
-        Title="AddStudent" Height="450" Width="1200"
+        Title="AddStudent"
+        Height="450"
+        Width="1200"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -15,23 +17,108 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <TextBlock Style="{DynamicResource MaterialDesignTextBlock}" Text="" Margin="0,0,0,354" Height="26" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="132">
+        <TextBlock Style="{DynamicResource MaterialDesignTextBlock}"
+                   Text=""
+                   Margin="0,21,0,0"
+                   Height="26"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"
+                   Width="132">
             Добавление студента
         </TextBlock>
-
-        <Button Style="{DynamicResource MaterialDesignPaperLightButton }" Height="32" Width="162" Margin="0,0,0,57" VerticalAlignment="Bottom" HorizontalAlignment="Center" Click="Button_Click">
+        <Button Style="{DynamicResource MaterialDesignPaperLightButton}"
+                Height="32"
+                Width="162"
+                Margin="0,105,0,0"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Click="Button_Click">
             Добавить студента
         </Button>
-        <TextBox x:Name="TextBoxSurName" Height="30" Width="82" Style="{DynamicResource MaterialDesignTextBoxBase}" Margin="30,137,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Фамилия" TextWrapping="WrapWithOverflow" GotFocus="TextBoxSurName_GotFocus" MaxLength="10"></TextBox>
-        <TextBox x:Name="TextBoxName" Height="30" Width="82" Style="{DynamicResource MaterialDesignTextBoxBase}" Margin="140,137,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Имя"/>
-        <TextBox x:Name="TextBoxPatronymic" Height="30" Width="82" Style="{DynamicResource MaterialDesignTextBoxBase}" Margin="254,137,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Отчество"/>
-        <TextBox x:Name="TextBoxAddress" Height="30" Width="82" Style="{DynamicResource MaterialDesignTextBoxBase}" Margin="367,137,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Адрес"/>
-        <CheckBox x:Name="CheckBoxStatusLearning" Style="{DynamicResource MaterialDesignCheckBox}" Margin="470,137,0,0" Content="Обучается" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="88"></CheckBox>
-        <ComboBox x:Name="ComboBoxRoom" Style="{DynamicResource MaterialDesignComboBox}" Margin="572,137,546,0" VerticalAlignment="Top" Height="30" Width="82"></ComboBox>
-        <TextBox x:Name="TextBoxFormEducation" Width="82" Style="{DynamicResource MaterialDesignTextBoxBase}" Margin="788,137,0,0" HorizontalAlignment="Left" Text="Форма обучения" Height="30" VerticalAlignment="Top"/>
-        <TextBox x:Name="TextBoxStatusResidence" Height="30" Width="82" Style="{DynamicResource MaterialDesignTextBoxBase}" Margin="679,137,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="Статус проживания"/>
-        <ComboBox x:Name="ComboBoxGroup" Style="{DynamicResource MaterialDesignComboBox}" Margin="899,137,219,0" VerticalAlignment="Top" Height="30" Width="82"/>
-        <ComboBox x:Name="ComboBoxParents" Style="{DynamicResource MaterialDesignComboBox}" Margin="1007,137,111,0" VerticalAlignment="Top" Height="30" Width="82"/>
+
+        <TextBox x:Name="TextBoxSurName"
+                 Style="{DynamicResource MaterialDesignTextBoxBase}"
+                 Margin="30,53,0,351"
+                 Text="Фамилия"
+                 TextWrapping="WrapWithOverflow"
+                 GotFocus="TextBox_GotFocus"
+                 MaxLength="10"
+                 HorizontalAlignment="Left"
+                 Width="82" />
+        <TextBox x:Name="TextBoxName"
+                 Height="30"
+                 Width="82"
+                 Style="{DynamicResource MaterialDesignTextBoxBase}"
+                 Margin="140,53,0,0"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Left"
+                 Text="Имя"
+                 MaxLength="15"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox x:Name="TextBoxPatronymic"
+                 Height="30"
+                 Width="82"
+                 Style="{DynamicResource MaterialDesignTextBoxBase}"
+                 MaxLength="15"
+                 Margin="254,53,0,0"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Left"
+                 Text="Отчество"
+                 GotFocus="TextBox_GotFocus" />
+        <TextBox x:Name="TextBoxAddress"
+                 Height="30"
+                 Width="82"
+                 Style="{DynamicResource MaterialDesignTextBoxBase}"
+                 Margin="367,53,0,0"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Left"
+                 Text="Адрес"
+                 GotFocus="TextBox_GotFocus" />
+        <CheckBox x:Name="CheckBoxStatusLearning"
+                  Style="{DynamicResource MaterialDesignCheckBox}"
+                  Margin="470,53,0,0"
+                  Content="Обучается"
+                  Height="32"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Width="88"></CheckBox>
+        <ComboBox x:Name="ComboBoxRoom"
+                  Style="{DynamicResource MaterialDesignComboBox}"
+                  Margin="572,53,0,0"
+                  VerticalAlignment="Top"
+                  Height="30"
+                  Width="82"
+                  HorizontalAlignment="Left"></ComboBox>
+        <TextBox x:Name="TextBoxStatusResidence"
+                 Width="82"
+                 Style="{DynamicResource MaterialDesignTextBoxBase}"
+                 Margin="679,53,0,0"
+                 HorizontalAlignment="Left"
+                 Text="Статус проживания"
+                 Height="30"
+                 VerticalAlignment="Top" />
+        <TextBox x:Name="TextBoxFormEducation"
+                 Width="82"
+                 Style="{DynamicResource MaterialDesignTextBoxBase}"
+                 Margin="788,53,0,0"
+                 HorizontalAlignment="Left"
+                 Text="Форма обучения"
+                 Height="30"
+                 VerticalAlignment="Top" />
+        <ComboBox x:Name="ComboBoxGroup"
+                  Style="{DynamicResource MaterialDesignComboBox}"
+                  Margin="899,53,0,0"
+                  VerticalAlignment="Top"
+                  Height="30"
+                  Width="82"
+                  HorizontalAlignment="Left" />
+        <ComboBox x:Name="ComboBoxParents"
+                  Style="{DynamicResource MaterialDesignComboBox}"
+                  Margin="1007,53,0,0"
+                  VerticalAlignment="Top"
+                  Height="30"
+                  Width="82"
+                  HorizontalAlignment="Left" />
 
     </Grid>
 </Window>

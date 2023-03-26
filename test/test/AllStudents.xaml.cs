@@ -33,7 +33,23 @@ namespace test
                 {
                     combobox.Items.Add(group.Id);
                 }
+                var Id_room = context.Room.ToList();
+                foreach (var room in Id_room)
+                {
+                    ComboBoxRoom.Items.Add(room.Id);
+                }
+                var Id_Group = context.Group.ToList();
+                foreach (var group in Id_Group)
+                {
+                    ComboBoxGroup.Items.Add(group.Id);
+                }
+                var Id_Parents = context.Parents.ToList();
+                foreach (var parents in Id_Parents)
+                {
+                    ComboBoxParents.Items.Add(parents.Id);
+                }
             }
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -42,9 +58,17 @@ namespace test
             {
                 var stud = context.Student.ToList();
                 TestViewStudents.ItemsSource = stud;
-                
+                foreach (var item in stud)
+                {
+                    MessageBox.Show($"{item.Surname}, {item.Name}, {item.Patronymic}, {item.Home_Address}, {item.Status_learning}, {item.Form_of_education}, {item.Status_residence}, {item.GroupId}, {item.ParentsId}, {item.RoomId}");
+                }
             }
-            MessageBox.Show(combobox.Text);
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.SelectAll();
         }
 
         private void TestViewStudents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -81,7 +105,10 @@ namespace test
             }
         }
 
-
+        private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
+        {
+            //AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, Convert.ToInt32(ComboBoxGroup.SelectedItem), Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
+        }
     }
 
 }

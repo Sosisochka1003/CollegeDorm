@@ -43,15 +43,15 @@ namespace test
             }
         }
 
-        private void TextBoxSurName_GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox textBoxSurName = sender as TextBox;
-            textBoxSurName.SelectAll();
+            TextBox textBox = sender as TextBox;
+            textBox.SelectAll();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text,TextBoxAddress.Text,CheckBoxStatusLearning.IsChecked.Value, TextBoxFormEducation.Text, TextBoxStatusResidence.Text,ComboBoxGroup,ComboBoxParents,ComboBoxRoom);
+            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text,TextBoxAddress.Text,CheckBoxStatusLearning.IsChecked.Value, TextBoxFormEducation.Text, TextBoxStatusResidence.Text,Convert.ToInt32(ComboBoxGroup.SelectedItem),Convert.ToInt32(ComboBoxParents.SelectedItem),Convert.ToInt32(ComboBoxRoom.SelectedItem));
         }
     }
 }

@@ -56,19 +56,19 @@ namespace test
         {
             using (var context = new DormContext())
             {
-                var room = context.Room.FirstOrDefault(r => r.Id == roomId);
+                Room room = context.Room.FirstOrDefault(r => r.Id == roomId);
                 if (room == null)
                 {
                     MessageBox.Show($"Room {roomId} not found.");
                     return;
                 }
-                var group = context.Group.FirstOrDefault(g => g.Id == GroupId);
+                Group group = context.Group.FirstOrDefault(g => g.Id == GroupId);
                 if (group == null)
                 {
                     MessageBox.Show($"Group {GroupId} not found.");
                     return;
                 }
-                var parents = context.Parents.FirstOrDefault(p => p.Id == Parentsid);
+                Parents parents = context.Parents.FirstOrDefault(p => p.Id == Parentsid);
                 if (parents == null)
                 {
                     MessageBox.Show($"Parent {Parentsid} not found.");
@@ -84,9 +84,12 @@ namespace test
                     Status_learning = statusLearning,
                     Form_of_education = formEducation,
                     Status_residence = statusResidence,
-                    GroupId = GroupId,
-                    ParentsId = Parentsid,
-                    RoomId = roomId
+                    GroupId = group.Id,
+                    Group = group,
+                    ParentsId = parents.Id,
+                    Parents = parents,
+                    RoomId = room.Id,
+                    Room = room
                 };
 
                 context.Student.Add(student);
