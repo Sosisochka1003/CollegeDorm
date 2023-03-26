@@ -52,20 +52,20 @@ namespace test
             }
         }
 
-        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, int GroupId, int Parentsid, int roomId)
+        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, string GroupNum, int Parentsid, int NumRoom)
         {
             using (var context = new DormContext())
             {
-                Room room = context.Room.FirstOrDefault(r => r.Id == roomId);
+                Room room = context.Room.FirstOrDefault(r => r.RoomNumber == NumRoom);
                 if (room == null)
                 {
-                    MessageBox.Show($"Room {roomId} not found.");
+                    MessageBox.Show($"Room {NumRoom} not found.");
                     return;
                 }
-                Group group = context.Group.FirstOrDefault(g => g.Id == GroupId);
+                Group group = context.Group.FirstOrDefault(g => g.Number == GroupNum);
                 if (group == null)
                 {
-                    MessageBox.Show($"Group {GroupId} not found.");
+                    MessageBox.Show($"Group {GroupNum} not found.");
                     return;
                 }
                 Parents parents = context.Parents.FirstOrDefault(p => p.Id == Parentsid);
@@ -84,7 +84,7 @@ namespace test
                     Status_learning = statusLearning,
                     Form_of_education = formEducation,
                     Status_residence = statusResidence,
-                    GroupId = group.Id,
+                    GroupNum = GroupNum,
                     Group = group,
                     ParentsId = parents.Id,
                     Parents = parents,

@@ -33,7 +33,7 @@ namespace test
                 var Id_Group = db.Group.ToList();
                 foreach (var group in Id_Group)
                 {
-                    ComboBoxGroup.Items.Add(group.Id);
+                    ComboBoxGroup.Items.Add(group.Number);
                 }
                 var Id_Parents = db.Parents.ToList();
                 foreach (var parents in Id_Parents)
@@ -51,7 +51,7 @@ namespace test
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text,TextBoxAddress.Text,CheckBoxStatusLearning.IsChecked.Value, TextBoxFormEducation.Text, TextBoxStatusResidence.Text,Convert.ToInt32(ComboBoxGroup.SelectedItem),Convert.ToInt32(ComboBoxParents.SelectedItem),Convert.ToInt32(ComboBoxRoom.SelectedItem));
+            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text,TextBoxAddress.Text,CheckBoxStatusLearning.IsChecked.Value, TextBoxFormEducation.Text, TextBoxStatusResidence.Text, ComboBoxGroup.Text, Convert.ToInt32(ComboBoxParents.SelectedItem),Convert.ToInt32(ComboBoxRoom.SelectedItem));
         }
     }
 }

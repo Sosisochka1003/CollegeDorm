@@ -11,7 +11,6 @@ namespace test.DataBaseClasses
     public class Group
     {
         [Key]
-        public int Id { get; set; }
         public string Number { get; set; }
         [ForeignKey("Speciality")]
         public int SpecialityId { get; set; }

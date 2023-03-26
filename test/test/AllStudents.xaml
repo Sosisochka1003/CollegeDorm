@@ -25,7 +25,8 @@
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"
-                         Width="112" />
+                         Width="112"
+                         materialDesign:TextFieldAssist.HasClearButton="True" />
                 <TextBox x:Name="TextBoxName"
                          Margin="0,0,7,0"
                          Padding="9,9,9,9"
@@ -36,7 +37,8 @@
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"
-                         Width="112" />
+                         Width="112"
+                         materialDesign:TextFieldAssist.HasClearButton="True" />
                 <TextBox x:Name="TextBoxPatronymic"
                          Margin="0,0,7,0"
                          Padding="9,9,9,9"
@@ -47,7 +49,8 @@
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"
-                         Width="112" />
+                         Width="112"
+                         materialDesign:TextFieldAssist.HasClearButton="True" />
                 <TextBox x:Name="TextBoxAddress"
                          Margin="0,0,7,0"
                          Padding="9,9,9,9"
@@ -58,7 +61,8 @@
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          TextWrapping="Wrap"
                          VerticalScrollBarVisibility="Auto"
-                         Width="112" />
+                         Width="112"
+                         materialDesign:TextFieldAssist.HasClearButton="True" />
                 <CheckBox x:Name="CheckBoxStatusLearning"
                           Margin="0,0,7,0"
                           Padding="9,9,9,9"
@@ -70,9 +74,9 @@
                 <ComboBox x:Name="ComboBoxRoom"
                           Margin="0,0,7,0"
                           Padding="9,9,9,9"
-                          Width="134"
+                          Width="146"
                           VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Id Комнаты"
+                          materialDesign:HintAssist.Hint="Номер Комнаты"
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           ItemsSource="{Binding ShortStringList}"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">
@@ -124,7 +128,7 @@
                           Padding="9,9,9,9"
                           Width="134"
                           VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Id Группы"
+                          materialDesign:HintAssist.Hint="Номер группы"
                           materialDesign:TextFieldAssist.HasClearButton="True"
                           ItemsSource="{Binding ShortStringList}"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}">

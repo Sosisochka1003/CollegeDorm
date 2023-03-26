@@ -23,6 +23,7 @@ namespace test
     /// </summary>
     public partial class AllStudents : Window
     {
+        Input_Validation _Validation = new Input_Validation();
         public AllStudents()
         {
             InitializeComponent();
@@ -31,17 +32,13 @@ namespace test
                 var gr = context.Group.ToList();
                 foreach (var group in gr)
                 {
-                    combobox.Items.Add(group.Id);
+                    combobox.Items.Add(group.Number);
+                    ComboBoxGroup.Items.Add(group.Number);
                 }
                 var Id_room = context.Room.ToList();
                 foreach (var room in Id_room)
                 {
-                    ComboBoxRoom.Items.Add(room.Id);
-                }
-                var Id_Group = context.Group.ToList();
-                foreach (var group in Id_Group)
-                {
-                    ComboBoxGroup.Items.Add(group.Id);
+                    ComboBoxRoom.Items.Add(room.RoomNumber);
                 }
                 var Id_Parents = context.Parents.ToList();
                 foreach (var parents in Id_Parents)
@@ -58,10 +55,6 @@ namespace test
             {
                 var stud = context.Student.ToList();
                 TestViewStudents.ItemsSource = stud;
-                foreach (var item in stud)
-                {
-                    MessageBox.Show($"{item.Surname}, {item.Name}, {item.Patronymic}, {item.Home_Address}, {item.Status_learning}, {item.Form_of_education}, {item.Status_residence}, {item.GroupId}, {item.ParentsId}, {item.RoomId}");
-                }
             }
         }
 
@@ -99,7 +92,7 @@ namespace test
             string filterText = e.AddedItems[0].ToString();
             using (var context = new DormContext())
             {
-                var klem = context.Student.Where(s => s.GroupId.ToString().Contains(filterText)).ToList();
+                var klem = context.Student.Where(s => s.GroupNum.Contains(filterText)).ToList();
                 FilteredItems.Clear();
                 TestViewStudents.ItemsSource = klem;
             }
@@ -107,8 +100,10 @@ namespace test
 
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            //AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, Convert.ToInt32(ComboBoxGroup.SelectedItem), Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
+            _Validation.Input_Validation_TextBox(TextBoxSurName);
+            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, ComboBoxGroup.Text, Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
         }
+
     }
 
 }
