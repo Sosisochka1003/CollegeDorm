@@ -39,7 +39,7 @@ namespace test
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddStudent(textbox_name_price.Text, Convert.ToInt32(textbox_number.Text));
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -75,6 +75,12 @@ namespace test
                 db.SaveChanges();
 
             }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            AddStudent addStudent = new AddStudent();
+            addStudent.Show();
         }
     }
 

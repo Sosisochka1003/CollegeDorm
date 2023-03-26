@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static test.DataBase;
 
 namespace test
 {
@@ -22,6 +23,35 @@ namespace test
         public AddStudent()
         {
             InitializeComponent();
+            using (DormContext db = new DormContext())
+            {
+                var Id_room = db.Room.ToList();
+                foreach (var room in Id_room)
+                {
+                    ComboBoxRoom.Items.Add(room.Id);
+                }
+                var Id_Group = db.Group.ToList();
+                foreach (var group in Id_Group)
+                {
+                    ComboBoxGroup.Items.Add(group.Id);
+                }
+                var Id_Parents = db.Parents.ToList();
+                foreach (var parents in Id_Parents)
+                {
+                    ComboBoxParents.Items.Add(parents.Id);
+                }
+            }
+        }
+
+        private void TextBoxSurName_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBoxSurName = sender as TextBox;
+            textBoxSurName.SelectAll();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text,TextBoxAddress.Text,CheckBoxStatusLearning.IsChecked.Value, TextBoxFormEducation.Text, TextBoxStatusResidence.Text,ComboBoxGroup,ComboBoxParents,ComboBoxRoom);
         }
     }
 }

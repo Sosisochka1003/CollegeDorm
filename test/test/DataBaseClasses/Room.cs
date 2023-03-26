@@ -16,8 +16,10 @@ namespace test.DataBaseClasses
         public decimal Cost { get; set; }
         [ForeignKey("Dormitory")]
         public int Id_Dormitory { get; set; }
+        public Dormitory Dormitory { get; set; }
         public int Living_space { get; set; }
         public int Number_of_beds { get; set; }
+        [ForeignKey("Student")]
         public List<Student> Students { get; set; }
     }
 }

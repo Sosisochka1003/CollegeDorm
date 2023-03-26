@@ -16,7 +16,7 @@
      FontFamily="{DynamicResource MaterialDesignFont}"
         >
     <Grid>
-        <Button Style="{DynamicResource MaterialDesignRaisedButton}" Background="#1a33ed" Height="32" Width="162" Margin="585,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left">Добавить студента</Button>
+        <Button Style="{DynamicResource MaterialDesignRaisedButton}" Background="#1a33ed" Height="32" Width="162" Margin="585,38,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_Click_3">Добавить студента</Button>
         <Button Style="{DynamicResource MaterialDesignRaisedButton}" Margin="302,39,350,324"></Button>
         <Button Margin="600,309,97,36" Click="Button_Click_2">
             blya

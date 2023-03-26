@@ -52,7 +52,7 @@ namespace test
             }
         }
 
-        public static void AddStudent(string name, int roomId)
+        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, int GroupId, int Parentsid, int roomId)
         {
             using (var context = new DormContext())
             {
@@ -62,15 +62,36 @@ namespace test
                     MessageBox.Show($"Room {roomId} not found.");
                     return;
                 }
+                var group = context.Group.FirstOrDefault(g => g.Id == GroupId);
+                if (group == null)
+                {
+                    MessageBox.Show($"Group {GroupId} not found.");
+                    return;
+                }
+                var parents = context.Parents.FirstOrDefault(p => p.Id == Parentsid);
+                if (parents == null)
+                {
+                    MessageBox.Show($"Parent {Parentsid} not found.");
+                    return;
+                }
 
                 var student = new Student
                 {
+                    Surname = surname,
                     Name = name,
+                    Patronymic = patronymic,
+                    Home_Address = address,
+                    Status_learning = statusLearning,
+                    Form_of_education = formEducation,
+                    Status_residence = statusResidence,
+                    GroupId = GroupId,
+                    ParentsId = Parentsid,
                     RoomId = roomId
                 };
 
                 context.Student.Add(student);
                 context.SaveChanges();
+                MessageBox.Show("Запись выполнена");
             }
         }
 
