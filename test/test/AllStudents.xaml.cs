@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using test.DataBaseClasses;
 using static test.DataBase;
+using System.Diagnostics;
+using System.Reflection;
+using Microsoft.Win32;
 
 namespace test
 {
@@ -23,7 +27,7 @@ namespace test
     /// </summary>
     public partial class AllStudents : Window
     {
-        Input_Validation _Validation = new Input_Validation();
+        Student selectedItem = new Student();
         public AllStudents()
         {
             InitializeComponent();
@@ -49,8 +53,24 @@ namespace test
             
         }
 
+        public async void SnackBar(string text)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                SnackbarOne.Message.Content = text;
+                SnackbarOne.IsActive = true;
+            });
+            await Task.Delay(4000);
+            this.Dispatcher.Invoke(() =>
+            {
+                SnackbarOne.IsActive = false;
+            });
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            SnackbarOne.IsActive = true;
+            SnackBar("Загрузка данных");
             using (var context = new DormContext())
             {
                 var stud = context.Student.ToList();
@@ -66,7 +86,23 @@ namespace test
 
         private void TestViewStudents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Student selectedItem = (Student)TestViewStudents.SelectedItem;
+            selectedItem = (Student)TestViewStudents.SelectedItem;
+            if (selectedItem != null)
+            {
+                TextBoxSurName.Text = selectedItem.Surname;
+                TextBoxName.Text = selectedItem.Name;
+                TextBoxPatronymic.Text = selectedItem.Patronymic;
+                TextBoxAddress.Text = selectedItem.Home_Address;
+                CheckBoxStatusLearning.IsChecked = selectedItem.Status_learning;
+                ComboBoxRoom.SelectedValue = selectedItem.RoomId;
+                ComboBoxStatusResidence.SelectedValue = selectedItem.Status_residence;
+                ComboBoxFormEducation.SelectedValue = selectedItem.Form_of_education;
+                ComboBoxGroup.SelectedValue = selectedItem.GroupNum;
+                ComboBoxParents.SelectedValue = selectedItem.ParentsId;
+                ButtonUpdateStudent.Visibility = Visibility.Visible;
+                ButtonCancel.Visibility = Visibility.Visible;
+                ButtonDelete.Visibility = Visibility.Visible;
+            }
         }
 
         public ObservableCollection<Student> FilteredItems { get; set; } = new ObservableCollection<Student>();
@@ -100,10 +136,92 @@ namespace test
 
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            _Validation.Input_Validation_TextBox(TextBoxSurName);
             AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, ComboBoxGroup.Text, Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
+            TextBoxSurName.Text = null;
+            TextBoxName.Text = null;
+            TextBoxPatronymic.Text = null;
+            TextBoxAddress.Text = null;
+            CheckBoxStatusLearning.IsChecked = false;
+            ComboBoxRoom.SelectedValue = null;
+            ComboBoxStatusResidence.SelectedValue = null;
+            ComboBoxFormEducation.SelectedValue = null;
+            ComboBoxGroup.SelectedValue = null;
+            ComboBoxParents.SelectedValue = null;
         }
 
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxSurName.Text = null;
+            TextBoxName.Text = null;
+            TextBoxPatronymic.Text = null;
+            TextBoxAddress.Text = null;
+            CheckBoxStatusLearning.IsChecked = false;
+            ComboBoxRoom.SelectedValue = null;
+            ComboBoxStatusResidence.SelectedValue = null;
+            ComboBoxFormEducation.SelectedValue = null;
+            ComboBoxGroup.SelectedValue = null;
+            ComboBoxParents.SelectedValue = null;
+            ButtonUpdateStudent.Visibility = Visibility.Hidden;
+            ButtonCancel.Visibility = Visibility.Hidden;
+            ButtonDelete.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonUpdateStudent_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new DormContext())
+            {
+                if (selectedItem != null)
+                {
+                    Room room = context.Room.FirstOrDefault(r => r.RoomNumber == Convert.ToInt32(ComboBoxRoom.Text));
+                    Group group = context.Group.FirstOrDefault(g => g.Number == ComboBoxGroup.Text);
+                    Parents parents = context.Parents.FirstOrDefault(p => p.Id == Convert.ToInt32(ComboBoxParents.Text));
+                    if (room == null || group == null || parents == null)
+                    {
+                        MessageBox.Show("Неверные данные");
+                        return;
+                    }
+                    selectedItem.Surname = TextBoxSurName.Text;
+                    selectedItem.Name = TextBoxName.Text;
+                    selectedItem.Patronymic = TextBoxPatronymic.Text;
+                    selectedItem.Home_Address = TextBoxAddress.Text;
+                    selectedItem.Status_learning = CheckBoxStatusLearning.IsChecked.Value;
+                    selectedItem.RoomId = Convert.ToInt32(ComboBoxRoom.Text);
+                    selectedItem.Room = room;
+                    selectedItem.Status_residence = ComboBoxStatusResidence.Text;
+                    selectedItem.Form_of_education = ComboBoxFormEducation.Text;
+                    selectedItem.GroupNum = ComboBoxGroup.Text;
+                    selectedItem.ParentsId = Convert.ToInt32(ComboBoxParents.Text);
+                }
+                context.Student.Update(selectedItem);
+                context.SaveChanges();
+                MessageBox.Show("Обновление данных");
+
+                selectedItem = null;
+            }
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            using (var context = new DormContext())
+            {
+                context.Student.Remove(selectedItem);
+                context.SaveChanges();
+                TextBoxSurName.Text = null;
+                TextBoxName.Text = null;
+                TextBoxPatronymic.Text = null;
+                TextBoxAddress.Text = null;
+                CheckBoxStatusLearning.IsChecked = false;
+                ComboBoxRoom.SelectedValue = null;
+                ComboBoxStatusResidence.SelectedValue = null;
+                ComboBoxFormEducation.SelectedValue = null;
+                ComboBoxGroup.SelectedValue = null;
+                ComboBoxParents.SelectedValue = null;
+                ButtonUpdateStudent.Visibility = Visibility.Hidden;
+                ButtonCancel.Visibility = Visibility.Hidden;
+                ButtonDelete.Visibility = Visibility.Hidden;
+                MessageBox.Show("Запись удалена");
+            }
+        }
     }
 
 }

@@ -40,7 +40,9 @@ namespace test
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
-                
+
+                //modelBuilder.Entity<Group>()
+                 //   .HasKey(g => g.Number);
                 //modelBuilder.Entity<Student>()
                 //    .HasOne(s => s.Room)
                 //    .WithMany(r => r.Students)

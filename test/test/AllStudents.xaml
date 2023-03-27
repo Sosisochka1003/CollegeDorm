@@ -10,178 +10,216 @@
         Height="450"
         Width="1420">
     <Grid>
-        <StackPanel Orientation="Vertical"
-                    Margin="0,0,0,0">
-            <StackPanel x:Name="StackPanelAddStudent"
-                        Orientation="Horizontal"
-                        Margin="5,35,0,5">
-                <TextBox x:Name="TextBoxSurName"
-                         Margin="3,0,7,0"
-                         Padding="9,9,9,9"
-                         Height="auto"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Hint="Фамилия"
-                         AcceptsReturn="True"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Width="112"
-                         materialDesign:TextFieldAssist.HasClearButton="True" />
-                <TextBox x:Name="TextBoxName"
-                         Margin="0,0,7,0"
-                         Padding="9,9,9,9"
-                         Height="auto"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Hint="Имя"
-                         AcceptsReturn="True"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Width="112"
-                         materialDesign:TextFieldAssist.HasClearButton="True" />
-                <TextBox x:Name="TextBoxPatronymic"
-                         Margin="0,0,7,0"
-                         Padding="9,9,9,9"
-                         Height="auto"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Hint="Отчество"
-                         AcceptsReturn="True"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Width="112"
-                         materialDesign:TextFieldAssist.HasClearButton="True" />
-                <TextBox x:Name="TextBoxAddress"
-                         Margin="0,0,7,0"
-                         Padding="9,9,9,9"
-                         Height="auto"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Hint="Адрес"
-                         AcceptsReturn="True"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Width="112"
-                         materialDesign:TextFieldAssist.HasClearButton="True" />
-                <CheckBox x:Name="CheckBoxStatusLearning"
-                          Margin="0,0,7,0"
-                          Padding="9,9,9,9"
-                          VerticalAlignment="Top"
-                          Content="Обучается"
-                          IsChecked="False"
-                          Style="{StaticResource MaterialDesignFilterChipCheckBox}"
-                          Height="36" />
-                <ComboBox x:Name="ComboBoxRoom"
-                          Margin="0,0,7,0"
-                          Padding="9,9,9,9"
-                          Width="146"
-                          VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Номер Комнаты"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          ItemsSource="{Binding ShortStringList}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBox.SelectedItem>
-                        <Binding Mode="TwoWay"
-                                 Path="SelectedValidationOutlined"
-                                 UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
-                <ComboBox x:Name="ComboBoxStatusResidence"
-                          Margin="0,0,7,0"
-                          Padding="9,9,9,9"
-                          Width="177"
-                          VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Статус проживания"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          ItemsSource="{Binding ShortStringList}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBox.SelectedItem>
-                        <Binding Mode="TwoWay"
-                                 Path="SelectedValidationOutlined"
-                                 UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                    <sys:String>Проживает</sys:String>
-                    <sys:String>Не проживает</sys:String>
-                </ComboBox>
-                <ComboBox x:Name="ComboBoxFormEducation"
-                          Margin="0,0,7,0"
-                          Padding="9,9,9,9"
-                          Width="168"
-                          VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Форма обучения"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          ItemsSource="{Binding ShortStringList}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBox.SelectedItem>
-                        <Binding Mode="TwoWay"
-                                 Path="SelectedValidationOutlined"
-                                 UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                    <sys:String>Очное</sys:String>
-                    <sys:String>Заочное</sys:String>
-                </ComboBox>
-                <ComboBox x:Name="ComboBoxGroup"
-                          Margin="0,0,7,0"
-                          Padding="9,9,9,9"
-                          Width="134"
-                          VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Номер группы"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          ItemsSource="{Binding ShortStringList}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBox.SelectedItem>
-                        <Binding Mode="TwoWay"
-                                 Path="SelectedValidationOutlined"
-                                 UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
-                <ComboBox x:Name="ComboBoxParents"
-                          Margin="0,0,7,0"
-                          Padding="9,9,9,9"
-                          Width="145"
-                          VerticalAlignment="Top"
-                          materialDesign:HintAssist.Hint="Id Родителей"
-                          materialDesign:TextFieldAssist.HasClearButton="True"
-                          ItemsSource="{Binding ShortStringList}"
-                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBox.SelectedItem>
-                        <Binding Mode="TwoWay"
-                                 Path="SelectedValidationOutlined"
-                                 UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
-                    </ComboBox.SelectedItem>
-                </ComboBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel
+                        Orientation="Vertical"
+                        Margin="0,0,0,0">
+                <StackPanel x:Name="StackPanelAddStudent"
+                            Orientation="Horizontal"
+                            Margin="5,35,0,5">
+                    <TextBox x:Name="TextBoxSurName"
+                             Margin="3,0,7,0"
+                             Padding="9,9,9,9"
+                             Height="auto"
+                             VerticalAlignment="Top"
+                             materialDesign:HintAssist.Hint="Фамилия"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Width="112"
+                             materialDesign:TextFieldAssist.HasClearButton="True" />
+                    <TextBox x:Name="TextBoxName"
+                             Margin="0,0,7,0"
+                             Padding="9,9,9,9"
+                             Height="auto"
+                             VerticalAlignment="Top"
+                             materialDesign:HintAssist.Hint="Имя"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Width="112"
+                             materialDesign:TextFieldAssist.HasClearButton="True" />
+                    <TextBox x:Name="TextBoxPatronymic"
+                             Margin="0,0,7,0"
+                             Padding="9,9,9,9"
+                             Height="auto"
+                             VerticalAlignment="Top"
+                             materialDesign:HintAssist.Hint="Отчество"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Width="112"
+                             materialDesign:TextFieldAssist.HasClearButton="True" />
+                    <TextBox x:Name="TextBoxAddress"
+                             Margin="0,0,7,0"
+                             Padding="9,9,9,9"
+                             Height="auto"
+                             VerticalAlignment="Top"
+                             materialDesign:HintAssist.Hint="Адрес"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Width="112"
+                             materialDesign:TextFieldAssist.HasClearButton="True" />
+                    <CheckBox x:Name="CheckBoxStatusLearning"
+                              Margin="0,0,7,0"
+                              Padding="9,9,9,9"
+                              VerticalAlignment="Top"
+                              Content="Обучается"
+                              IsChecked="False"
+                              Style="{StaticResource MaterialDesignFilterChipCheckBox}"
+                              Height="36" />
+                    <ComboBox x:Name="ComboBoxRoom"
+                              Margin="0,0,7,0"
+                              Padding="9,9,9,9"
+                              Width="146"
+                              VerticalAlignment="Top"
+                              materialDesign:HintAssist.Hint="Номер Комнаты"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              ItemsSource="{Binding ShortStringList}"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.SelectedItem>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedValidationOutlined"
+                                     UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxStatusResidence"
+                              Margin="0,0,7,0"
+                              Padding="9,9,9,9"
+                              Width="177"
+                              VerticalAlignment="Top"
+                              materialDesign:HintAssist.Hint="Статус проживания"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              ItemsSource="{Binding ShortStringList}"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.SelectedItem>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedValidationOutlined"
+                                     UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <sys:String>Проживает</sys:String>
+                        <sys:String>Не проживает</sys:String>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxFormEducation"
+                              Margin="0,0,7,0"
+                              Padding="9,9,9,9"
+                              Width="168"
+                              VerticalAlignment="Top"
+                              materialDesign:HintAssist.Hint="Форма обучения"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              ItemsSource="{Binding ShortStringList}"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.SelectedItem>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedValidationOutlined"
+                                     UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                        <sys:String>Очное</sys:String>
+                        <sys:String>Заочное</sys:String>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxGroup"
+                              Margin="0,0,7,0"
+                              Padding="9,9,9,9"
+                              Width="134"
+                              VerticalAlignment="Top"
+                              materialDesign:HintAssist.Hint="Номер группы"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              ItemsSource="{Binding ShortStringList}"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.SelectedItem>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedValidationOutlined"
+                                     UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
+                    <ComboBox x:Name="ComboBoxParents"
+                              Margin="0,0,7,0"
+                              Padding="9,9,9,9"
+                              Width="145"
+                              VerticalAlignment="Top"
+                              materialDesign:HintAssist.Hint="Id Родителей"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              ItemsSource="{Binding ShortStringList}"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBox.SelectedItem>
+                            <Binding Mode="TwoWay"
+                                     Path="SelectedValidationOutlined"
+                                     UpdateSourceTrigger="PropertyChanged">
+                            </Binding>
+                        </ComboBox.SelectedItem>
+                    </ComboBox>
 
+                </StackPanel>
+                <StackPanel x:Name="StackPanelButtonAddStudent"
+                            Height="53"
+                            Orientation="Horizontal">
+                    <Button x:Name="ButtonAddStudent"
+                            Margin="10,3,0,0"
+                            HorizontalAlignment="Left"
+                            Click="ButtonAddStudent_Click"
+                            Height="35"
+                            Content="Добавить студента"
+                            Width="auto" />
+                    <Button x:Name="ButtonUpdateStudent"
+                            Margin="10,3,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Height="35"
+                            Content="Обновить студента"
+                            Click="ButtonUpdateStudent_Click"
+                            Visibility="Hidden"
+                            Width="auto" />
+                    <Button x:Name="ButtonCancel"
+                            Margin="10,3,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Height="35"
+                            Content="Отменить"
+                            Visibility="Hidden"
+                            Width="auto"
+                            Click="ButtonCancel_Click" />
+                    <Button x:Name="ButtonDelete"
+                            Margin="10,3,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Height="35"
+                            Content="Удалить"
+                            Visibility="Hidden"
+                            Width="auto"
+                            Click="ButtonDelete_Click" />
+
+                </StackPanel>
             </StackPanel>
-            <StackPanel x:Name="StackPanelButtonAddStudent"
-                        Height="53">
-                <Button x:Name="ButtonAddStudent"
-                        Margin="10,3,0,0"
-                        HorizontalAlignment="Left"
-                        Click="ButtonAddStudent_Click"
-                        Height="40"
-                        Content="Добавить студента"
-                        Width="170" />
-            </StackPanel>
-        </StackPanel>
-        <TextBlock Style="{DynamicResource MaterialDesignTextBlock}"
-                   Text=""
-                   Margin="0,8,0,0"
-                   Height="26"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center"
-                   Width="132">
+            <TextBlock Style="{DynamicResource MaterialDesignTextBlock}"
+                       Text=""
+                       Margin="0,8,0,0"
+                       Height="26"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"
+                       Width="132">
             Добавление студента
-        </TextBlock>
+            </TextBlock>
+        </Grid>
+
 
         <Grid Name="ListStudent"
-              Margin="0,144,0,0">
+              Grid.Row="1">
             <ComboBox x:Name="combobox"
-                      Margin="230,12,0,0"
+                      Margin="324,12,0,0"
                       Height="24"
                       VerticalAlignment="Top"
                       HorizontalAlignment="Left"
@@ -189,7 +227,7 @@
                       IsEditable="True"
                       SelectionChanged="combobox_SelectionChanged" />
             <TextBox x:Name="textboxSearchName"
-                     Margin="89,12,0,0"
+                     Margin="173,12,0,0"
                      Height="24"
                      VerticalAlignment="Top"
                      HorizontalAlignment="Left"
@@ -203,8 +241,8 @@
                     Height="30"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"
-                    Width="50">
-                refresh
+                    Width="auto">
+                Обновить
             </Button>
             <ListView x:Name="TestViewStudents"
                       HorizontalContentAlignment="Stretch"
@@ -217,39 +255,45 @@
                         <GridViewColumn Header="Id"
                                         DisplayMemberBinding="{Binding Id}"
                                         Width="auto" />
-                        <GridViewColumn Header="RoomId"
+                        <GridViewColumn Header="Комната"
                                         DisplayMemberBinding="{Binding RoomId}"
                                         Width="auto" />
-                        <GridViewColumn Header="Surname"
+                        <GridViewColumn Header="Фамилия"
                                         DisplayMemberBinding="{Binding Surname}"
                                         Width="auto" />
-                        <GridViewColumn Header="Name"
+                        <GridViewColumn Header="Имя"
                                         DisplayMemberBinding="{Binding Name}"
                                         Width="auto" />
-                        <GridViewColumn Header="Patronymic"
+                        <GridViewColumn Header="Отчество"
                                         DisplayMemberBinding="{Binding Patronymic}"
                                         Width="auto" />
-                        <GridViewColumn Header="Home Address"
+                        <GridViewColumn Header="Домашний адрес"
                                         DisplayMemberBinding="{Binding Home_Address}"
                                         Width="auto" />
-                        <GridViewColumn Header="Status learning"
+                        <GridViewColumn Header="Статус обучения"
                                         DisplayMemberBinding="{Binding Status_learning}"
                                         Width="auto" />
-                        <GridViewColumn Header="Form education"
+                        <GridViewColumn Header="Фомра обучения"
                                         DisplayMemberBinding="{Binding Form_of_education}"
                                         Width="auto" />
-                        <GridViewColumn Header="Status_residence"
+                        <GridViewColumn Header="Статус проживания"
                                         DisplayMemberBinding="{Binding Status_residence}"
                                         Width="auto" />
-                        <GridViewColumn Header="Id_group"
-                                        DisplayMemberBinding="{Binding GroupId}"
+                        <GridViewColumn Header="Группа"
+                                        DisplayMemberBinding="{Binding GroupNum}"
                                         Width="auto" />
-                        <GridViewColumn Header="Id_parents"
+                        <GridViewColumn Header="Id родителей"
                                         DisplayMemberBinding="{Binding ParentsId}"
                                         Width="auto" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
+        <!-- long hand form for setting the message -->
+        <materialDesign:Snackbar x:Name="SnackbarOne"
+                                 IsActive="False" Grid.Row="3">
+            <materialDesign:SnackbarMessage ActionContent="UNDO"
+                                            Content="Hello 2" />
+        </materialDesign:Snackbar>
     </Grid>
 </Window>

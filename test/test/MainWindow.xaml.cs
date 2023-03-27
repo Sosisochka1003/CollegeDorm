@@ -52,26 +52,22 @@ namespace test
         {
             using (DormContext db = new DormContext())
             {
-                //Speciality spec1 = new Speciality { Name = "mocha" };
-                //Group group1 = new Group { Id_spec = 1, Number = "klema1"};
-                //Parents par1 = new Parents { Mother = "нету", Father = "нету", Marriage = true };
-                //Student student1 = new Student
-                //{
-                //    RoomId = 1,
-                //    Surname = "Гапченко",
-                //    Name = "Сергей",
-                //    Patronymic = "Сергеевич",
-                //    Home_Address = "korolev",
-                //    Status_learning = true,
-                //    Form_of_education = "очно",
-                //    Status_residence = "klema",
-                //    Id_group = 1,
-                //    Id_parents = 1,
-                //};
-                //db.Speciality.Add(spec1);
-                //db.Group.Add(group1);
-                //db.Parents.Add(par1);
-                //db.Students.Add(student1);
+                Speciality speciality = new Speciality() { Id = 1, Name = "Информациооные системы" };
+                Speciality speciality1 = new Speciality() { Id = 2, Name = "Юристы" };
+                Group group = new Group() { Number = "ИС1-20", SpecialityId = 1, Speciality = speciality };
+                Group group1 = new Group() { Number = "Ю1-21", SpecialityId = 2, Speciality = speciality1 };
+                Parents parents = new Parents() { Id = 1, Father = "Никита", Mother = "Миша", Marriage = true};
+                Parents parents1 = new Parents() { Id = 2, Father = "За хлебом", Mother = "Женя", Marriage = false};
+                Dormitory dormitory = new Dormitory() { Id = 1, Address = "Королёв", Numbers_of_rooms = 20 };
+                Room room = new Room() { Id = 1, RoomNumber = 1, Cost = 3000, DormitoryId = 1, Dormitory = dormitory, Living_space = 30, Number_of_beds = 50 };
+                db.Speciality.Add(speciality);
+                db.Speciality.Add(speciality1);
+                db.Group.Add(group);
+                db.Group.Add(group1);
+                db.Parents.Add(parents);
+                db.Parents.Add(parents1);
+                db.Dormitory.Add(dormitory);
+                db.Room.Add(room);
                 db.SaveChanges();
 
             }
