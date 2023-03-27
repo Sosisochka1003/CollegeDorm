@@ -36,7 +36,6 @@ namespace test
                 var gr = context.Group.ToList();
                 foreach (var group in gr)
                 {
-                    combobox.Items.Add(group.Number);
                     ComboBoxGroup.Items.Add(group.Number);
                 }
                 var Id_room = context.Room.ToList();
@@ -60,28 +59,24 @@ namespace test
                 SnackbarOne.Message.Content = text;
                 SnackbarOne.IsActive = true;
             });
-            await Task.Delay(4000);
+            await Task.Delay(2000);
             this.Dispatcher.Invoke(() =>
             {
                 SnackbarOne.IsActive = false;
             });
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void UpdateData()
         {
-            SnackbarOne.IsActive = true;
-            SnackBar("Загрузка данных");
             using (var context = new DormContext())
             {
                 var stud = context.Student.ToList();
                 TestViewStudents.ItemsSource = stud;
             }
         }
-
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            textBox.SelectAll();
+            SnackBar("Данные из БД");
+            UpdateData();
         }
 
         private void TestViewStudents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -116,19 +111,12 @@ namespace test
                 var klem = context.Student.Where(s => 
                                                     s.Name.ToLower().Contains(filterText) ||
                                                     s.Surname.ToLower().Contains(filterText) ||
-                                                    s.Patronymic.ToLower().Contains(filterText))
+                                                    s.Patronymic.ToLower().Contains(filterText) ||
+                                                    s.GroupNum.ToLower().Contains(filterText) ||
+                                                    s.Home_Address.ToLower().Contains(filterText) ||
+                                                    s.Form_of_education.ToLower() == filterText ||
+                                                    s.Status_residence.ToLower() == filterText)
                                                 .ToList();
-                FilteredItems.Clear();
-                TestViewStudents.ItemsSource = klem;
-            }
-        }
-
-        private void combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string filterText = e.AddedItems[0].ToString();
-            using (var context = new DormContext())
-            {
-                var klem = context.Student.Where(s => s.GroupNum.Contains(filterText)).ToList();
                 FilteredItems.Clear();
                 TestViewStudents.ItemsSource = klem;
             }
@@ -147,6 +135,8 @@ namespace test
             ComboBoxFormEducation.SelectedValue = null;
             ComboBoxGroup.SelectedValue = null;
             ComboBoxParents.SelectedValue = null;
+            SnackBar("Студент добавлен");
+            UpdateData();
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
@@ -164,6 +154,8 @@ namespace test
             ButtonUpdateStudent.Visibility = Visibility.Hidden;
             ButtonCancel.Visibility = Visibility.Hidden;
             ButtonDelete.Visibility = Visibility.Hidden;
+            SnackBar("Операция отменена");
+            UpdateData();
         }
 
         private void ButtonUpdateStudent_Click(object sender, RoutedEventArgs e)
@@ -177,7 +169,7 @@ namespace test
                     Parents parents = context.Parents.FirstOrDefault(p => p.Id == Convert.ToInt32(ComboBoxParents.Text));
                     if (room == null || group == null || parents == null)
                     {
-                        MessageBox.Show("Неверные данные");
+                        SnackBar("Неверные данные");
                         return;
                     }
                     selectedItem.Surname = TextBoxSurName.Text;
@@ -194,8 +186,8 @@ namespace test
                 }
                 context.Student.Update(selectedItem);
                 context.SaveChanges();
-                MessageBox.Show("Обновление данных");
-
+                SnackBar("Обновление данных");
+                UpdateData();
                 selectedItem = null;
             }
         }
@@ -219,7 +211,8 @@ namespace test
                 ButtonUpdateStudent.Visibility = Visibility.Hidden;
                 ButtonCancel.Visibility = Visibility.Hidden;
                 ButtonDelete.Visibility = Visibility.Hidden;
-                MessageBox.Show("Запись удалена");
+                SnackBar("Запись удалена");
+                UpdateData();
             }
         }
     }

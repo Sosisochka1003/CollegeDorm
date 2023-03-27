@@ -33,7 +33,8 @@ namespace test
         
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            AddRoom(Convert.ToInt32(textbox_number.Text),Convert.ToDecimal(textbox_name_price.Text));
+            test_snackbox test_Snackbox = new test_snackbox();
+            test_Snackbox.Show();
 
         }
 
@@ -44,8 +45,7 @@ namespace test
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            AllStudents win1 = new AllStudents();
-            win1.Show();
+            
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -75,8 +75,18 @@ namespace test
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            AddStudent addStudent = new AddStudent();
-            addStudent.Show();
+        }
+
+        private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
+        {
+            AllStudents stud = new AllStudents();
+            stud.Show();
+        }
+
+        private void ButtonAddSpeciality_Click(object sender, RoutedEventArgs e)
+        {
+            AllSpeciality speciality = new AllSpeciality();
+            speciality.Show();
         }
     }
 

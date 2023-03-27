@@ -96,7 +96,6 @@ namespace test
 
                 context.Student.Add(student);
                 context.SaveChanges();
-                MessageBox.Show("Запись выполнена");
             }
         }
 
