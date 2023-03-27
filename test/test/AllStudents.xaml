@@ -289,11 +289,11 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <!-- long hand form for setting the message -->
-        <materialDesign:Snackbar x:Name="SnackbarOne"
-                                 IsActive="False" Grid.Row="3">
-            <materialDesign:SnackbarMessage ActionContent="UNDO"
-                                            Content="Hello 2" />
+        <materialDesign:Snackbar x:Name="SnackbarFive"
+                                 Grid.Row="2"
+                                 HorizontalAlignment="Stretch">
+            <materialDesign:SnackbarMessage ActionContent="OK"
+                                            Content="This Snackbar is stretched horizontally. Consider allowing your content to push up." />
         </materialDesign:Snackbar>
     </Grid>
 </Window>
