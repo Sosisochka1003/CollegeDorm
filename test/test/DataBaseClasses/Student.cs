@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using static test.DataBase;
 
 namespace test.DataBaseClasses
@@ -25,7 +26,7 @@ namespace test.DataBaseClasses
         public string Form_of_education { get; set; }
         public string Status_residence { get; set; }
         [ForeignKey("Group")]
-        public string GroupNum { get; set; }
+        public int GroupId { get; set; }
         public Group Group { get; set; }
         [ForeignKey("Parents")]
         public int ParentsId { get; set; }

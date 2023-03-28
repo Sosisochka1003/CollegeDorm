@@ -97,6 +97,7 @@ namespace test
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
+            TextBoxName.Text = null;
             ButtonsVisible();
             SnackBar("Операция отменена");
             UpdateData();
@@ -133,11 +134,14 @@ namespace test
             string filterText = ((TextBox)sender).Text.ToLower();
             using (var context = new DormContext())
             {
-                var klem = context.Speciality.Where(s =>
+                if (filterText != null)
+                {
+                    var klem = context.Speciality.Where(s =>
                                                     s.Name.ToLower().Contains(filterText))
                                                 .ToList();
-                FilteredItems.Clear();
-                TestView.ItemsSource = klem;
+                    FilteredItems.Clear();
+                    TestView.ItemsSource = klem;
+                }
             }
         }
     }

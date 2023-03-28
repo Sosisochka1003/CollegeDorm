@@ -277,8 +277,8 @@
                         <GridViewColumn Header="Статус проживания"
                                         DisplayMemberBinding="{Binding Status_residence}"
                                         Width="auto" />
-                        <GridViewColumn Header="Группа"
-                                        DisplayMemberBinding="{Binding GroupNum}"
+                        <GridViewColumn Header="Id группы"
+                                        DisplayMemberBinding="{Binding GroupId}"
                                         Width="auto" />
                         <GridViewColumn Header="Id родителей"
                                         DisplayMemberBinding="{Binding ParentsId}"

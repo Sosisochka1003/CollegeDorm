@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using test.DataBaseClasses;
+using test.FormsAddElements;
 using static test.DataBase;
 
 namespace test
@@ -54,8 +55,8 @@ namespace test
             {
                 Speciality speciality = new Speciality() { Id = 1, Name = "Информациооные системы" };
                 Speciality speciality1 = new Speciality() { Id = 2, Name = "Юристы" };
-                Group group = new Group() { Number = "ИС1-20", SpecialityId = 1, Speciality = speciality };
-                Group group1 = new Group() { Number = "Ю1-21", SpecialityId = 2, Speciality = speciality1 };
+                Group group = new Group() {Id = 1, Number = "ИС1-20", SpecialityId = 1, Speciality = speciality };
+                Group group1 = new Group() {Id = 2, Number = "Ю1-21", SpecialityId = 2, Speciality = speciality1 };
                 Parents parents = new Parents() { Id = 1, Father = "Никита", Mother = "Миша", Marriage = true};
                 Parents parents1 = new Parents() { Id = 2, Father = "За хлебом", Mother = "Женя", Marriage = false};
                 Dormitory dormitory = new Dormitory() { Id = 1, Address = "Королёв", Numbers_of_rooms = 20 };
@@ -87,6 +88,12 @@ namespace test
         {
             AllSpeciality speciality = new AllSpeciality();
             speciality.Show();
+        }
+
+        private void ButtonAddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            AllGroup group = new AllGroup();
+            group.Show();
         }
     }
 

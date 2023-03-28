@@ -54,7 +54,7 @@ namespace test
             }
         }
 
-        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, string GroupNum, int Parentsid, int NumRoom)
+        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, int GroupId, int Parentsid, int NumRoom)
         {
             using (var context = new DormContext())
             {
@@ -64,10 +64,10 @@ namespace test
                     MessageBox.Show($"Room {NumRoom} not found.");
                     return;
                 }
-                Group group = context.Group.FirstOrDefault(g => g.Number == GroupNum);
+                Group group = context.Group.FirstOrDefault(g => g.Id == GroupId);
                 if (group == null)
                 {
-                    MessageBox.Show($"Group {GroupNum} not found.");
+                    MessageBox.Show($"Group {GroupId} not found.");
                     return;
                 }
                 Parents parents = context.Parents.FirstOrDefault(p => p.Id == Parentsid);
@@ -86,7 +86,7 @@ namespace test
                     Status_learning = statusLearning,
                     Form_of_education = formEducation,
                     Status_residence = statusResidence,
-                    GroupNum = GroupNum,
+                    GroupId = GroupId,
                     Group = group,
                     ParentsId = parents.Id,
                     Parents = parents,

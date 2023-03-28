@@ -26,6 +26,10 @@
                     Margin="5,5,0,0"
                     Content="Добавить специальность"
                     Click="ButtonAddSpeciality_Click" />
+            <Button x:Name="ButtonAddGroup"
+                    Margin="5,5,0,0"
+                    Content="Добавить группу"
+                    Click="ButtonAddGroup_Click" />
         </StackPanel>
         <Button Margin="615,361,82,0"
                 Click="Button_Click_2"

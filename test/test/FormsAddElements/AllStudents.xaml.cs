@@ -36,7 +36,7 @@ namespace test
                 var gr = context.Group.ToList();
                 foreach (var group in gr)
                 {
-                    ComboBoxGroup.Items.Add(group.Number);
+                    ComboBoxGroup.Items.Add(group.Id);
                 }
                 var Id_room = context.Room.ToList();
                 foreach (var room in Id_room)
@@ -92,7 +92,7 @@ namespace test
                 ComboBoxRoom.SelectedValue = selectedItem.RoomId;
                 ComboBoxStatusResidence.SelectedValue = selectedItem.Status_residence;
                 ComboBoxFormEducation.SelectedValue = selectedItem.Form_of_education;
-                ComboBoxGroup.SelectedValue = selectedItem.GroupNum;
+                ComboBoxGroup.SelectedValue = selectedItem.GroupId;
                 ComboBoxParents.SelectedValue = selectedItem.ParentsId;
                 ButtonUpdateStudent.Visibility = Visibility.Visible;
                 ButtonCancel.Visibility = Visibility.Visible;
@@ -112,7 +112,7 @@ namespace test
                                                     s.Name.ToLower().Contains(filterText) ||
                                                     s.Surname.ToLower().Contains(filterText) ||
                                                     s.Patronymic.ToLower().Contains(filterText) ||
-                                                    s.GroupNum.ToLower().Contains(filterText) ||
+                                                    s.Group.Number.ToLower().Contains(filterText) ||
                                                     s.Home_Address.ToLower().Contains(filterText) ||
                                                     s.Form_of_education.ToLower() == filterText ||
                                                     s.Status_residence.ToLower() == filterText)
@@ -124,7 +124,7 @@ namespace test
 
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, ComboBoxGroup.Text, Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
+            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, Convert.ToInt32(ComboBoxGroup.Text), Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
             TextBoxSurName.Text = null;
             TextBoxName.Text = null;
             TextBoxPatronymic.Text = null;
@@ -181,7 +181,7 @@ namespace test
                     selectedItem.Room = room;
                     selectedItem.Status_residence = ComboBoxStatusResidence.Text;
                     selectedItem.Form_of_education = ComboBoxFormEducation.Text;
-                    selectedItem.GroupNum = ComboBoxGroup.Text;
+                    selectedItem.GroupId = Convert.ToInt32(ComboBoxGroup.Text);
                     selectedItem.ParentsId = Convert.ToInt32(ComboBoxParents.Text);
                 }
                 context.Student.Update(selectedItem);

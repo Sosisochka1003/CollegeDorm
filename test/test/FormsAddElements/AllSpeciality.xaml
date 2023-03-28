@@ -130,7 +130,7 @@
         </Grid>
         <materialDesign:Snackbar x:Name="SnackbarOne"
                                  Margin="0,0,10,0"
-                                 Grid.Row="2"
+                                 Grid.Row="0"
                                  VerticalAlignment="Bottom"
                                  HorizontalAlignment="Right"
                                  IsActive="False"
