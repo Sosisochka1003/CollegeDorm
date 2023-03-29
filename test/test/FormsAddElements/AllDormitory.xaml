@@ -1,0 +1,154 @@
+﻿<Window x:Class="test.FormsAddElements.AllDormitory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:test.FormsAddElements"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="AllDormitory" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical"
+                        Margin="0,0,0,0">
+                <StackPanel x:Name="StackPanelAdd"
+                            Orientation="Horizontal"
+                            Margin="5,35,0,5">
+                    <TextBox x:Name="TextBoxAddress"
+                             Margin="3,0,7,0"
+                             Padding="9,9,9,9"
+                             Height="auto"
+                             VerticalAlignment="Top"
+                             materialDesign:HintAssist.Hint="Адрес"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Width="181"
+                             materialDesign:TextFieldAssist.HasClearButton="True" />
+                    <TextBox x:Name="TextBoxCountRoom"
+                             Margin="3,0,7,0"
+                             Padding="9,9,9,9"
+                             Height="auto"
+                             VerticalAlignment="Top"
+                             materialDesign:HintAssist.Hint="Кол-во комнат"
+                             AcceptsReturn="True"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Width="144"
+                             materialDesign:TextFieldAssist.HasClearButton="True" />
+                </StackPanel>
+                <StackPanel x:Name="StackPanelButtonAdd"
+                            Height="53"
+                            Orientation="Horizontal">
+                    <Button x:Name="ButtonAdd"
+                            Margin="10,3,0,0"
+                            HorizontalAlignment="Left"
+                            Click="ButtonAdd_Click"
+                            Height="35"
+                            Content="Добавить"
+                            Width="auto" />
+                    <Button x:Name="ButtonUpdate"
+                            Margin="10,3,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Height="35"
+                            Content="Обновить"
+                            Click="ButtonUpdate_Click"
+                            Visibility="Hidden"
+                            Width="auto" />
+                    <Button x:Name="ButtonCancel"
+                            Margin="10,3,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Height="35"
+                            Content="Отменить"
+                            Visibility="Hidden"
+                            Width="auto"
+                            Click="ButtonCancel_Click" />
+                    <Button x:Name="ButtonDelete"
+                            Margin="10,3,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Height="35"
+                            Content="Удалить"
+                            Visibility="Hidden"
+                            Width="auto"
+                            Click="ButtonDelete_Click" />
+
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Style="{DynamicResource MaterialDesignTextBlock}"
+                       Text=""
+                       Margin="0,4,0,0"
+                       Height="26"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Center"
+                       Width="auto">
+            Добавление общежития
+            </TextBlock>
+        </Grid>
+
+
+        <Grid Name="ListStudent"
+              Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ButtonRefresh"
+                        Margin="5,5,5,0"
+                        Click="ButtonRefresh_Click"
+                        Height="auto"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Width="auto">
+                    Обновить
+                </Button>
+                <TextBox x:Name="TextBoxSearch"
+                         Padding="9,9,9,9"
+                         Height="auto"
+                         VerticalAlignment="Top"
+                         materialDesign:HintAssist.Hint="Поиск"
+                         AcceptsReturn="True"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         TextChanged="TextBoxSearch_TextChanged"
+                         Width="112"
+                         materialDesign:TextFieldAssist.HasClearButton="True" />
+            </StackPanel>
+            <ListView x:Name="TestView"
+                      HorizontalContentAlignment="Stretch"
+                      MinWidth="80"
+                      MinHeight="25"
+                      Margin="0,41,0,0"
+                      MouseDoubleClick="TestView_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id"
+                                        DisplayMemberBinding="{Binding Id}"
+                                        Width="auto" />
+                        <GridViewColumn Header="Адрес"
+                                        DisplayMemberBinding="{Binding Address}"
+                                        Width="auto" />
+                        <GridViewColumn Header="Кол-во комнат"
+                                        DisplayMemberBinding="{Binding Numbers_of_rooms}"
+                                        Width="auto" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <materialDesign:Snackbar x:Name="SnackbarOne"
+                                 Margin="0,0,10,0"
+                                 Grid.Row="0"
+                                 VerticalAlignment="Bottom"
+                                 HorizontalAlignment="Right"
+                                 IsActive="False"
+                                 Message="klema" />
+    </Grid>
+
+</Window>

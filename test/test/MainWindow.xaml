@@ -17,19 +17,32 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-            <Button x:Name="ButtonAddStudent"
-                    Margin="5,5,0,0"
-                    Content="Добавить студента"
-                    Click="ButtonAddStudent_Click" />
-            <Button x:Name="ButtonAddSpeciality"
-                    Margin="5,5,0,0"
-                    Content="Добавить специальность"
-                    Click="ButtonAddSpeciality_Click" />
-            <Button x:Name="ButtonAddGroup"
-                    Margin="5,5,0,0"
-                    Content="Добавить группу"
-                    Click="ButtonAddGroup_Click" />
+        <StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top">
+                <Button x:Name="ButtonAddStudent"
+                        Margin="5,5,0,0"
+                        Content="Добавить студента"
+                        Click="ButtonAddStudent_Click" />
+                <Button x:Name="ButtonAddSpeciality"
+                        Margin="5,5,0,0"
+                        Content="Добавить специальность"
+                        Click="ButtonAddSpeciality_Click" />
+                <Button x:Name="ButtonAddGroup"
+                        Margin="5,5,0,0"
+                        Content="Добавить группу"
+                        Click="ButtonAddGroup_Click" />
+                <Button x:Name="ButtonAddDormitory"
+                        Margin="5,5,0,0"
+                        Content="Добавить общежитие"
+                        Click="ButtonAddDormitory_Click" />
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="ButtonAddParents"
+                        Margin="5,5,0,0"
+                        Content="Добавить родителей"
+                        Click="ButtonAddParents_Click" />
+            </StackPanel>
         </StackPanel>
         <Button Margin="615,361,82,0"
                 Click="Button_Click_2"

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -18,22 +19,14 @@ using static test.DataBase;
 namespace test.FormsAddElements
 {
     /// <summary>
-    /// Логика взаимодействия для AllGroup.xaml
+    /// Логика взаимодействия для AllDormitory.xaml
     /// </summary>
-    public partial class AllGroup : Window
+    public partial class AllDormitory : Window
     {
-        Group selectedItem = new Group();
-        public AllGroup()
+        Dormitory selectedItem = new Dormitory();
+        public AllDormitory()
         {
             InitializeComponent();
-            using (var context = new DormContext())
-            {
-                var spec = context.Speciality.ToList();
-                foreach (var item in spec)
-                {
-                    ComboBoxSpeciality.Items.Add(item.Name);
-                }
-            }
         }
         private void ButtonsVisible()
         {
@@ -59,32 +52,25 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                var group = context.Group.ToList();
-                TestView.ItemsSource = group;
+                var dorm = context.Dormitory.ToList();
+                TestView.ItemsSource = dorm;
             }
         }
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new DormContext())
             {
-                Speciality spec = context.Speciality.FirstOrDefault(s => s.Name == ComboBoxSpeciality.SelectedValue);
-                if (spec == null)
+                Dormitory dorm = new Dormitory
                 {
-                    SnackBar("Не верная специальность");
-                    return;
-                }
-                Group group = new Group
-                {
-                    Number = TextBoxName.Text,
-                    SpecialityId = spec.Id,
-                    Speciality = spec
+                    Address = TextBoxAddress.Text,
+                    Numbers_of_rooms = Convert.ToInt32(TextBoxCountRoom.Text),
                 };
-                context.Group.Add(group);
+                context.Dormitory.Add(dorm);
                 context.SaveChanges();
                 SnackBar("Добавлена новая запись");
                 UpdateData();
-                TextBoxName.Text = null;
-                ComboBoxSpeciality.Text = null;
+                TextBoxAddress.Text = null;
+                TextBoxCountRoom.Text = null;
             }
         }
 
@@ -94,22 +80,15 @@ namespace test.FormsAddElements
             {
                 if (selectedItem != null)
                 {
-                    Speciality spec = context.Speciality.FirstOrDefault(s => s.Name == ComboBoxSpeciality.SelectedValue);
-                    if (spec == null)
-                    {
-                        SnackBar("Неверная специальность");
-                        return;
-                    }
-                    selectedItem.Number = TextBoxName.Text;
-                    selectedItem.SpecialityId = spec.Id;
-                    selectedItem.Speciality = spec;
+                    selectedItem.Address = TextBoxAddress.Text;
+                    selectedItem.Numbers_of_rooms = Convert.ToInt32(TextBoxCountRoom.Text);
                 }
-                context.Group.Update(selectedItem);
+                context.Dormitory.Update(selectedItem);
                 context.SaveChanges();
                 SnackBar("Обновление данных");
                 ButtonsVisible();
-                TextBoxName.Text = null;
-                ComboBoxSpeciality.Text = null;
+                TextBoxAddress.Text = null;
+                TextBoxCountRoom.Text = null;
                 UpdateData();
                 selectedItem = null;
             }
@@ -117,8 +96,8 @@ namespace test.FormsAddElements
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            TextBoxName.Text= null;
-            ComboBoxSpeciality.Text= null;
+            TextBoxAddress.Text = null;
+            TextBoxCountRoom.Text = null;
             ButtonsVisible();
             SnackBar("Операция отменена");
             UpdateData();
@@ -128,22 +107,16 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                context.Group.Remove(selectedItem);
+                context.Dormitory.Remove(selectedItem);
                 context.SaveChanges();
-                TextBoxName.Text = null;
-                ComboBoxSpeciality.Text= null;
+                TextBoxAddress.Text = null;
+                TextBoxCountRoom.Text = null;
                 ButtonsVisible();
                 SnackBar("Запись удалена");
                 UpdateData();
             }
         }
-
-        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateData();
-            SnackBar("Данные из БД");
-        }
-        public ObservableCollection<Group> FilteredItems { get; set; } = new ObservableCollection<Group>();
+        public ObservableCollection<Dormitory> FilteredItems { get; set; } = new ObservableCollection<Dormitory>();
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -152,9 +125,8 @@ namespace test.FormsAddElements
             {
                 if (filterText != null)
                 {
-                    var klem = context.Group.Where(g =>
-                                                    g.Number.ToLower().Contains(filterText) ||
-                                                    g.Speciality.Name.ToLower().Contains(filterText))
+                    var klem = context.Dormitory.Where(d =>
+                                                    d.Address.ToLower().Contains(filterText))
                                                 .ToList();
                     FilteredItems.Clear();
                     TestView.ItemsSource = klem;
@@ -164,20 +136,25 @@ namespace test.FormsAddElements
 
         private void TestView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            selectedItem = (Group)TestView.SelectedItem;
+            selectedItem = (Dormitory)TestView.SelectedItem;
             using (var context = new DormContext())
             {
                 if (selectedItem != null)
                 {
-                    Speciality speciality = context.Speciality.FirstOrDefault(s => s.Id == selectedItem.SpecialityId);
-                    TextBoxName.Text = selectedItem.Number;
-                    ComboBoxSpeciality.Text = speciality.Name;
+                    TextBoxAddress.Text = selectedItem.Address;
+                    TextBoxCountRoom.Text = selectedItem.Numbers_of_rooms.ToString();
                     ButtonUpdate.Visibility = Visibility.Visible;
                     ButtonCancel.Visibility = Visibility.Visible;
                     ButtonDelete.Visibility = Visibility.Visible;
                     ButtonAdd.Visibility = Visibility.Hidden;
                 }
             }
+        }
+
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateData();
+            SnackBar("Данные из БД");
         }
     }
 }

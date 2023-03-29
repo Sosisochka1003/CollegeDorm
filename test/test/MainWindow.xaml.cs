@@ -95,6 +95,18 @@ namespace test
             AllGroup group = new AllGroup();
             group.Show();
         }
+
+        private void ButtonAddDormitory_Click(object sender, RoutedEventArgs e)
+        {
+            AllDormitory dorm = new AllDormitory();
+            dorm.Show();
+        }
+
+        private void ButtonAddParents_Click(object sender, RoutedEventArgs e)
+        {
+            AllParents parents = new AllParents();
+            parents.Show();
+        }
     }
 
 }
