@@ -63,6 +63,7 @@ namespace test.FormsAddElements
                 TestView.ItemsSource = group;
             }
         }
+        public ObservableCollection<Group> FilteredItems { get; set; } = new ObservableCollection<Group>();
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new DormContext())
@@ -143,7 +144,6 @@ namespace test.FormsAddElements
             UpdateData();
             SnackBar("Данные из БД");
         }
-        public ObservableCollection<Group> FilteredItems { get; set; } = new ObservableCollection<Group>();
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {

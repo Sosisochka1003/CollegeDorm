@@ -14,18 +14,15 @@ namespace test
         public class DormContext : DbContext
         {
             public DbSet<Dormitory> Dormitory { get; set; }
-            public DbSet<SoftInventory> SoftInventory { get; set; }
             public DbSet<Document> Document { get; set; }
             public DbSet<Speciality> Speciality { get; set; }
             public DbSet<Group> Group { get; set; }
             public DbSet<Parents> Parents { get; set; }
             public DbSet<StudentSoftStock> StudentSoftStock { get; set; }
-            public DbSet<ListOfDocument> ListOfDocument { get; set; }
             public DbSet<Room> Room { get; set; }
             public DbSet<Student> Student { get; set; }
-            public DbSet<FurnitureInTheRoom> FurnitureInTheRoom { get; set; }
-            public DbSet<HardInventory> HardInventory { get; set; }
-            
+            public DbSet<HardInventoryRoom> HardInventoryRoom { get; set; }
+
             public DormContext()
             {
                 Database.EnsureCreated();
@@ -140,24 +137,24 @@ namespace test
             }
         }
 
-        public static void ListStudentsInRoom(int roomId)
-        {
-            using (var context = new DormContext())
-            {
-                var room = context.Room.Include(r => r.Students).FirstOrDefault(r => r.Id == roomId);
-                if (room == null)
-                {
-                    MessageBox.Show($"Room {roomId} not found.");
-                    return;
-                }
+        //public static void ListStudentsInRoom(int roomId)
+        //{
+        //    using (var context = new DormContext())
+        //    {
+        //        var room = context.Room.Include(r => r.Students).FirstOrDefault(r => r.Id == roomId);
+        //        if (room == null)
+        //        {
+        //            MessageBox.Show($"Room {roomId} not found.");
+        //            return;
+        //        }
 
-                MessageBox.Show($"Students in Room {room.RoomNumber}:");
-                foreach (var student in room.Students)
-                {
-                    MessageBox.Show(student.Name);
-                }
-            }
-        }
+        //        MessageBox.Show($"Students in Room {room.RoomNumber}:");
+        //        foreach (var student in room.Students)
+        //        {
+        //            MessageBox.Show(student.Name);
+        //        }
+        //    }
+        //}
 
         public static void GetRoomCost(int roomId)
         {

@@ -31,14 +31,6 @@ namespace test
             InitializeComponent();
         }
 
-        
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            test_snackbox test_Snackbox = new test_snackbox();
-            test_Snackbox.Show();
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
@@ -55,10 +47,10 @@ namespace test
             {
                 Speciality speciality = new Speciality() { Id = 1, Name = "Информациооные системы" };
                 Speciality speciality1 = new Speciality() { Id = 2, Name = "Юристы" };
-                Group group = new Group() {Id = 1, Number = "ИС1-20", SpecialityId = 1, Speciality = speciality };
-                Group group1 = new Group() {Id = 2, Number = "Ю1-21", SpecialityId = 2, Speciality = speciality1 };
-                Parents parents = new Parents() { Id = 1, Father = "Никита", Mother = "Миша", Marriage = true};
-                Parents parents1 = new Parents() { Id = 2, Father = "За хлебом", Mother = "Женя", Marriage = false};
+                Group group = new Group() { Id = 1, Number = "ИС1-20", SpecialityId = 1, Speciality = speciality };
+                Group group1 = new Group() { Id = 2, Number = "Ю1-21", SpecialityId = 2, Speciality = speciality1 };
+                Parents parents = new Parents() { Id = 1, Father = "Никита", Mother = "Миша", Marriage = true };
+                Parents parents1 = new Parents() { Id = 2, Father = "За хлебом", Mother = "Женя", Marriage = false };
                 Dormitory dormitory = new Dormitory() { Id = 1, Address = "Королёв", Numbers_of_rooms = 20 };
                 Room room = new Room() { Id = 1, RoomNumber = 1, Cost = 3000, DormitoryId = 1, Dormitory = dormitory, Living_space = 30, Number_of_beds = 50 };
                 db.Speciality.Add(speciality);
@@ -106,6 +98,12 @@ namespace test
         {
             AllParents parents = new AllParents();
             parents.Show();
+        }
+
+        private void ButtonAddRoom_Click(object sender, RoutedEventArgs e)
+        {
+            AllRoom room = new AllRoom();
+            room.Show();
         }
     }
 

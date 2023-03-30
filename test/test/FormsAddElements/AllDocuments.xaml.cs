@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -19,14 +18,19 @@ using static test.DataBase;
 namespace test.FormsAddElements
 {
     /// <summary>
-    /// Логика взаимодействия для AllParents.xaml
+    /// Логика взаимодействия для AllDocuments.xaml
     /// </summary>
-    public partial class AllParents : Window
+    public partial class AllDocuments : Window
     {
-        Parents selectedItem = new Parents();
-        public AllParents()
+        Document selectedItem = new Document();
+        public AllDocuments()
         {
             InitializeComponent();
+            using (var context = new DormContext())
+            {
+                var stud = context.Student.ToList();
+                TestView.ItemsSource = stud;
+            }
         }
         private void ButtonsVisible()
         {
@@ -52,28 +56,35 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                var par = context.Parents.ToList();
-                TestView.ItemsSource = par;
+                var dorm = context.Dormitory.ToList();
+                TestView.ItemsSource = dorm;
             }
         }
-        public ObservableCollection<Parents> FilteredItems { get; set; } = new ObservableCollection<Parents>();
+        public ObservableCollection<Document> FilteredItems { get; set; } = new ObservableCollection<Document>();
+
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new DormContext())
             {
-                Parents par = new Parents
+                Student stud = context.Student.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxStudent.SelectedValue));
+                if (stud == null)
                 {
-                    Mother = TextBoxMother.Text,
-                    Father = TextBoxFather.Text,
-                    Marriage = CheckBoxStatusMarriage.IsChecked.Value
+                    SnackBar("Неверный студент");
+                    return;
+                }
+                Document doc = new Document
+                {
+                    Name = TextBoxName.Text,
+                    StudentId = stud.Id,
+                    StudentSurname = stud.Surname,
+                    Student = stud
                 };
-                context.Parents.Add(par);
+                context.Document.Add(doc);
                 context.SaveChanges();
                 SnackBar("Добавлена новая запись");
                 UpdateData();
-                TextBoxMother.Text = null;
-                TextBoxFather.Text = null;
-                CheckBoxStatusMarriage.IsChecked = false;
+                TextBoxName.Text = null;
+                ComboBoxStudent.Text = null;
             }
         }
 
@@ -83,17 +94,23 @@ namespace test.FormsAddElements
             {
                 if (selectedItem != null)
                 {
-                    selectedItem.Mother = TextBoxMother.Text;
-                    selectedItem.Father = TextBoxFather.Text;
-                    selectedItem.Marriage = CheckBoxStatusMarriage.IsChecked.Value;
+                    Student stud = context.Student.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxStudent.SelectedValue));
+                    if (stud == null)
+                    {
+                        SnackBar("Неверный студент");
+                        return;
+                    }
+                    selectedItem.Name = TextBoxName.Text;
+                    selectedItem.StudentId = stud.Id;
+                    selectedItem.StudentSurname = stud.Surname;
+                    selectedItem.Student = stud;
                 }
-                context.Parents.Update(selectedItem);
+                context.Document.Update(selectedItem);
                 context.SaveChanges();
                 SnackBar("Обновление данных");
                 ButtonsVisible();
-                TextBoxMother.Text = null;
-                TextBoxFather.Text = null;
-                CheckBoxStatusMarriage.IsChecked = false;
+                TextBoxName.Text = null;
+                ComboBoxStudent.Text = null;
                 UpdateData();
                 selectedItem = null;
             }
@@ -101,9 +118,8 @@ namespace test.FormsAddElements
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
-            TextBoxMother.Text = null;
-            TextBoxFather.Text = null;
-            CheckBoxStatusMarriage.IsChecked = false;
+            TextBoxName.Text = null;
+            ComboBoxStudent.Text = null;
             ButtonsVisible();
             SnackBar("Операция отменена");
             UpdateData();
@@ -113,15 +129,20 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                context.Parents.Remove(selectedItem);
+                context.Document.Remove(selectedItem);
                 context.SaveChanges();
-                TextBoxMother.Text = null;
-                TextBoxFather.Text = null;
-                CheckBoxStatusMarriage.IsChecked = false;
+                TextBoxName.Text = null;
+                ComboBoxStudent.Text = null;
                 ButtonsVisible();
                 SnackBar("Запись удалена");
                 UpdateData();
             }
+        }
+
+        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateData();
+            SnackBar("Данные из БД");
         }
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -131,9 +152,9 @@ namespace test.FormsAddElements
             {
                 if (filterText != null)
                 {
-                    var klem = context.Parents.Where(p =>
-                                                    p.Mother.ToLower().Contains(filterText) ||
-                                                    p.Father.ToLower().Contains(filterText))
+                    var klem = context.Document.Where(d =>
+                                                    d.Name.ToLower().Contains(filterText) ||
+                                                    d.StudentSurname.ToLower().Contains(filterText))
                                                 .ToList();
                     FilteredItems.Clear();
                     TestView.ItemsSource = klem;
@@ -143,26 +164,19 @@ namespace test.FormsAddElements
 
         private void TestView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            selectedItem = (Parents)TestView.SelectedItem;
+            selectedItem = (Document)TestView.SelectedItem;
             using (var context = new DormContext())
             {
                 if (selectedItem != null)
                 {
-                    TextBoxMother.Text = selectedItem.Mother;
-                    TextBoxFather.Text = selectedItem.Father;
-                    CheckBoxStatusMarriage.IsChecked = selectedItem.Marriage;
+                    TextBoxName.Text = selectedItem.Name;
+                    ComboBoxStudent.Text = selectedItem.StudentId.ToString();
                     ButtonUpdate.Visibility = Visibility.Visible;
                     ButtonCancel.Visibility = Visibility.Visible;
                     ButtonDelete.Visibility = Visibility.Visible;
                     ButtonAdd.Visibility = Visibility.Hidden;
                 }
             }
-        }
-
-        private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateData();
-            SnackBar("Данные из БД");
         }
     }
 }

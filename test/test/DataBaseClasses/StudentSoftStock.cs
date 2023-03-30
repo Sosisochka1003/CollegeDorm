@@ -12,12 +12,11 @@ namespace test.DataBaseClasses
     {
         [Key]
         public int Id { get; set; }
+        public string Name { get; set; }
         [ForeignKey("Student")]
         public int StudentId { get; set; }
+        public string StudentName { get; set; }
         public Student student { get; set; }
-        [ForeignKey("SoftInventory")]
-        public int SoftInventoryId { get; set; }
-        public SoftInventory SoftInventory { get; set; }
         public DateTime Date_issue { get; set; }
     }
 }

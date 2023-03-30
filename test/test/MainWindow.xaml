@@ -37,11 +37,15 @@
                         Content="Добавить общежитие"
                         Click="ButtonAddDormitory_Click" />
             </StackPanel>
-            <StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Button x:Name="ButtonAddParents"
                         Margin="5,5,0,0"
                         Content="Добавить родителей"
                         Click="ButtonAddParents_Click" />
+                <Button x:Name="ButtonAddRoom"
+                        Margin="5,5,0,0"
+                        Content="Добавить комнату"
+                        Click="ButtonAddRoom_Click" />
             </StackPanel>
         </StackPanel>
         <Button Margin="615,361,82,0"
@@ -61,12 +65,6 @@
                 Height="32"
                 VerticalAlignment="Top">
             Student
-        </Button>
-        <Button x:Name="button1"
-                Width="auto"
-                Click="button1_Click"
-                Margin="415,306,285,57">
-            Room
         </Button>
         <TextBox Margin="33,321,629,0"
                  x:Name="textbox_name_price"

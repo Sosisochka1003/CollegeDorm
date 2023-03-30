@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace test.DataBaseClasses
 {
-    public class ListOfDocument
+    public class HardInventoryRoom
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("Student")]
-        public int StudentId { get; set; }
-        public Student Student { get; set; }
-        [ForeignKey("Document")]
-        public int DocumentId { get; set; }
-        public List<Document> Documents { get; set; }
+        public string Name { get; set; }
+        [ForeignKey("Room")]
+        public int RoomId { get; set; }
+        public Room Room { get; set; }
+        public DateTime Date_purchase { get; set; }
     }
 }

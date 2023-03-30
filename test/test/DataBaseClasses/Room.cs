@@ -19,6 +19,5 @@ namespace test.DataBaseClasses
         public Dormitory Dormitory { get; set; }
         public int Living_space { get; set; }
         public int Number_of_beds { get; set; }
-        public List<Student> Students { get; set; }
     }
 }
