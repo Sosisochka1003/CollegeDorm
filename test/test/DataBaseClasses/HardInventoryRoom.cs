@@ -16,6 +16,6 @@ namespace test.DataBaseClasses
         [ForeignKey("Room")]
         public int RoomId { get; set; }
         public Room Room { get; set; }
-        public DateTime Date_purchase { get; set; }
+        public DateOnly Date_purchase { get; set; }
     }
 }

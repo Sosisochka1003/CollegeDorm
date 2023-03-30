@@ -105,6 +105,18 @@ namespace test
             AllRoom room = new AllRoom();
             room.Show();
         }
+
+        private void ButtonAddDocument_Click(object sender, RoutedEventArgs e)
+        {
+            AllDocuments document = new AllDocuments();
+            document.Show();
+        }
+
+        private void ButtonAddStudentSoft_Click(object sender, RoutedEventArgs e)
+        {
+            AllStudentSoftStock allStudentSoftStock = new AllStudentSoftStock();
+            allStudentSoftStock.Show();
+        }
     }
 
 }

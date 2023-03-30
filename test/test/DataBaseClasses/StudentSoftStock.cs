@@ -17,6 +17,6 @@ namespace test.DataBaseClasses
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public Student student { get; set; }
-        public DateTime Date_issue { get; set; }
+        public DateOnly Date_issue { get; set; }
     }
 }
