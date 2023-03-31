@@ -117,6 +117,12 @@ namespace test
             AllStudentSoftStock allStudentSoftStock = new AllStudentSoftStock();
             allStudentSoftStock.Show();
         }
+
+        private void ButtonAddHardInventoryRoom_Click(object sender, RoutedEventArgs e)
+        {
+            AllHardInventoryRoom allHardInventoryRoom = new AllHardInventoryRoom();
+            allHardInventoryRoom.Show();
+        }
     }
 
 }

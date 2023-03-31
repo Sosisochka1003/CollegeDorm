@@ -1,11 +1,12 @@
-﻿<Window x:Class="test.FormsAddElements.AllDocuments"
+﻿<Window x:Class="test.FormsAddElements.AllHardInventoryRoom"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:test.FormsAddElements"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AllDocuments" Height="450" Width="800">
+        Title="AllHardInventoryRoom" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -30,16 +31,22 @@
                              VerticalScrollBarVisibility="Auto"
                              Width="160"
                              materialDesign:TextFieldAssist.HasClearButton="True" />
-                    <ComboBox x:Name="ComboBoxStudent"
+                    <ComboBox x:Name="ComboBoxRoom"
                               Margin="0,0,7,0"
                               Padding="9,9,9,9"
                               MinWidth="140"
                               Width="auto"
                               VerticalAlignment="Top"
-                              materialDesign:HintAssist.Hint="Студент"
+                              materialDesign:HintAssist.Hint="Комната"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               ItemsSource="{Binding ShortStringList}"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}" />
+                    <DatePicker x:Name="DatePickerDatePurchase"
+                                Width="140"
+                                Margin="3,0,7,0"
+                                Padding="9,9,9,9"
+                                materialDesign:HintAssist.Hint="Дата покупки"
+                                Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
                 </StackPanel>
                 <StackPanel x:Name="StackPanelButtonAddStudent"
                             Height="53"
@@ -88,7 +95,7 @@
                        VerticalAlignment="Top"
                        HorizontalAlignment="Center"
                        Width="auto">
-            Добавление документов
+            Добавление мебели комнаты
             </TextBlock>
         </Grid>
 
@@ -123,7 +130,6 @@
                       MinWidth="80"
                       MinHeight="25"
                       Margin="0,41,0,0"
-                      ItemsSource="{Binding Document}"
                       MouseDoubleClick="TestView_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
@@ -133,11 +139,11 @@
                         <GridViewColumn Header="Название"
                                         DisplayMemberBinding="{Binding Name}"
                                         Width="auto" />
-                        <GridViewColumn Header="Id студента"
-                                        DisplayMemberBinding="{Binding StudentId}"
+                        <GridViewColumn Header="Id комнаты"
+                                        DisplayMemberBinding="{Binding RoomId}"
                                         Width="auto" />
-                        <GridViewColumn Header="Фамилия"
-                                        DisplayMemberBinding="{Binding StudentSurname}"
+                        <GridViewColumn Header="Дата покупки"
+                                        DisplayMemberBinding="{Binding Date_purchase}"
                                         Width="auto" />
                     </GridView>
                 </ListView.View>

@@ -18,20 +18,20 @@ using static test.DataBase;
 namespace test.FormsAddElements
 {
     /// <summary>
-    /// Логика взаимодействия для AllDocuments.xaml
+    /// Логика взаимодействия для AllHardInventoryRoom.xaml
     /// </summary>
-    public partial class AllDocuments : Window
+    public partial class AllHardInventoryRoom : Window
     {
-        Document selectedItem = new Document();
-        public AllDocuments()
+        HardInventoryRoom selectedItem = new HardInventoryRoom();
+        public AllHardInventoryRoom()
         {
             InitializeComponent();
             using (var context = new DormContext())
             {
-                var stud = context.Student.ToList();
-                foreach (var item in stud)
+                var room = context.Room.ToList();
+                foreach (var item in room)
                 {
-                    ComboBoxStudent.Items.Add(item.Id);
+                    ComboBoxRoom.Items.Add(item.Id);
                 }
             }
         }
@@ -59,35 +59,35 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                var dorm = context.Document.ToList();
-                TestView.ItemsSource = dorm;
+                var soft = context.HardInventoryRoom.ToList();
+                TestView.ItemsSource = soft;
             }
         }
-        public ObservableCollection<Document> FilteredItems { get; set; } = new ObservableCollection<Document>();
-
+        public ObservableCollection<HardInventoryRoom> FilteredItems { get; set; } = new ObservableCollection<HardInventoryRoom>();
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new DormContext())
             {
-                Student stud = context.Student.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxStudent.SelectedValue));
-                if (stud == null)
+                Room room = context.Room.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxRoom.SelectedValue));
+                if (room == null)
                 {
-                    SnackBar("Неверный студент");
+                    SnackBar("Неверная комната");
                     return;
                 }
-                Document doc = new Document
+                HardInventoryRoom hard = new HardInventoryRoom
                 {
                     Name = TextBoxName.Text,
-                    StudentId = stud.Id,
-                    StudentSurname = stud.Surname,
-                    Student = stud
+                    RoomId = room.Id,
+                    Room = room,
+                    Date_purchase = DateOnly.FromDateTime((DateTime)DatePickerDatePurchase.SelectedDate),
                 };
-                context.Document.Add(doc);
+                context.HardInventoryRoom.Add(hard);
                 context.SaveChanges();
                 SnackBar("Добавлена новая запись");
                 UpdateData();
                 TextBoxName.Text = null;
-                ComboBoxStudent.Text = null;
+                ComboBoxRoom.Text = null;
+                DatePickerDatePurchase.Text = null;
             }
         }
 
@@ -97,23 +97,23 @@ namespace test.FormsAddElements
             {
                 if (selectedItem != null)
                 {
-                    Student stud = context.Student.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxStudent.SelectedValue));
-                    if (stud == null)
+                    Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.SelectedValue));
+                    if (room == null)
                     {
-                        SnackBar("Неверный студент");
+                        SnackBar("Неверная комната");
                         return;
                     }
                     selectedItem.Name = TextBoxName.Text;
-                    selectedItem.StudentId = stud.Id;
-                    selectedItem.StudentSurname = stud.Surname;
-                    selectedItem.Student = stud;
+                    selectedItem.RoomId = room.Id;
+                    selectedItem.Room = room;
+                    selectedItem.Date_purchase = DateOnly.FromDateTime((DateTime)DatePickerDatePurchase.SelectedDate);
                 }
-                context.Document.Update(selectedItem);
+                context.HardInventoryRoom.Update(selectedItem);
                 context.SaveChanges();
                 SnackBar("Обновление данных");
                 ButtonsVisible();
                 TextBoxName.Text = null;
-                ComboBoxStudent.Text = null;
+                ComboBoxRoom.Text = null;
                 UpdateData();
                 selectedItem = null;
             }
@@ -122,7 +122,8 @@ namespace test.FormsAddElements
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             TextBoxName.Text = null;
-            ComboBoxStudent.Text = null;
+            ComboBoxRoom.Text = null;
+            DatePickerDatePurchase.Text = null;
             ButtonsVisible();
             SnackBar("Операция отменена");
             UpdateData();
@@ -132,10 +133,11 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                context.Document.Remove(selectedItem);
+                context.HardInventoryRoom.Remove(selectedItem);
                 context.SaveChanges();
                 TextBoxName.Text = null;
-                ComboBoxStudent.Text = null;
+                ComboBoxRoom.Text = null;
+                DatePickerDatePurchase.Text = null;
                 ButtonsVisible();
                 SnackBar("Запись удалена");
                 UpdateData();
@@ -155,9 +157,8 @@ namespace test.FormsAddElements
             {
                 if (filterText != null)
                 {
-                    var klem = context.Document.Where(d =>
-                                                    d.Name.ToLower().Contains(filterText) ||
-                                                    d.StudentSurname.ToLower().Contains(filterText))
+                    var klem = context.HardInventoryRoom.Where(s =>
+                                                    s.Name.ToLower().Contains(filterText))
                                                 .ToList();
                     FilteredItems.Clear();
                     TestView.ItemsSource = klem;
@@ -167,13 +168,14 @@ namespace test.FormsAddElements
 
         private void TestView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            selectedItem = (Document)TestView.SelectedItem;
+            selectedItem = (HardInventoryRoom)TestView.SelectedItem;
             using (var context = new DormContext())
             {
                 if (selectedItem != null)
                 {
                     TextBoxName.Text = selectedItem.Name;
-                    ComboBoxStudent.Text = selectedItem.StudentId.ToString();
+                    ComboBoxRoom.Text = selectedItem.RoomId.ToString();
+                    DatePickerDatePurchase.Text = selectedItem.Date_purchase.ToString();
                     ButtonUpdate.Visibility = Visibility.Visible;
                     ButtonCancel.Visibility = Visibility.Visible;
                     ButtonDelete.Visibility = Visibility.Visible;

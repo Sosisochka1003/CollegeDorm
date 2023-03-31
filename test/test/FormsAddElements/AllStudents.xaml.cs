@@ -41,7 +41,7 @@ namespace test
                 var Id_room = context.Room.ToList();
                 foreach (var room in Id_room)
                 {
-                    ComboBoxRoom.Items.Add(room.RoomNumber);
+                    ComboBoxRoom.Items.Add(room.Id);
                 }
                 var Id_Parents = context.Parents.ToList();
                 foreach (var parents in Id_Parents)
@@ -97,11 +97,11 @@ namespace test
                 ButtonUpdateStudent.Visibility = Visibility.Visible;
                 ButtonCancel.Visibility = Visibility.Visible;
                 ButtonDelete.Visibility = Visibility.Visible;
+                ButtonAddStudent.Visibility = Visibility.Hidden;
             }
         }
 
         public ObservableCollection<Student> FilteredItems { get; set; } = new ObservableCollection<Student>();
-        //public ObservableCollection<Group> GFilteredItems { get; set; } = new ObservableCollection<Group>();
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -164,8 +164,8 @@ namespace test
             {
                 if (selectedItem != null)
                 {
-                    Room room = context.Room.FirstOrDefault(r => r.RoomNumber == Convert.ToInt32(ComboBoxRoom.Text));
-                    Group group = context.Group.FirstOrDefault(g => g.Number == ComboBoxGroup.Text);
+                    Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.Text));
+                    Group group = context.Group.FirstOrDefault(g => g.Id == Convert.ToInt32(ComboBoxGroup.Text));
                     Parents parents = context.Parents.FirstOrDefault(p => p.Id == Convert.ToInt32(ComboBoxParents.Text));
                     if (room == null || group == null || parents == null)
                     {

@@ -51,14 +51,14 @@ namespace test
             }
         }
 
-        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, int GroupId, int Parentsid, int NumRoom)
+        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, int GroupId, int Parentsid, int RoomId)
         {
             using (var context = new DormContext())
             {
-                Room room = context.Room.FirstOrDefault(r => r.RoomNumber == NumRoom);
+                Room room = context.Room.FirstOrDefault(r => r.Id == RoomId);
                 if (room == null)
                 {
-                    MessageBox.Show($"Room {NumRoom} not found.");
+                    MessageBox.Show($"Room {RoomId} not found.");
                     return;
                 }
                 Group group = context.Group.FirstOrDefault(g => g.Id == GroupId);
