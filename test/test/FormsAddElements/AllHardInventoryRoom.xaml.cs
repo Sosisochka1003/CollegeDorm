@@ -152,17 +152,35 @@ namespace test.FormsAddElements
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string filterText = ((TextBox)sender).Text.ToLower();
+            var filterText = ((TextBox)sender).Text.ToLower();
+
+            var filtered = GetFilteredResults(filterText);
+
+            FilteredItems.Clear();
+            TestView.ItemsSource = filtered;
+        }
+
+        private List<HardInventoryRoom> GetFilteredResults(string filter)
+        {
             using (var context = new DormContext())
             {
-                if (filterText != null)
+                var filtered = new List<HardInventoryRoom>();
+
+                filtered.AddRange(context.HardInventoryRoom.Where(d =>
+                                                    d.Name.ToLower().Contains(filter)));
+
+                var isNumber = int.TryParse(filter, out int filterNumber);
+
+                if (!isNumber)
                 {
-                    var klem = context.HardInventoryRoom.Where(s =>
-                                                    s.Name.ToLower().Contains(filterText))
-                                                .ToList();
-                    FilteredItems.Clear();
-                    TestView.ItemsSource = klem;
+                    return filtered;
                 }
+
+                filtered.AddRange(context.HardInventoryRoom.Where(d =>
+                                                    d.Id == filterNumber ||
+                                                    d.RoomId == filterNumber));
+
+                return filtered;
             }
         }
 

@@ -154,18 +154,36 @@ namespace test.FormsAddElements
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string filterText = ((TextBox)sender).Text.ToLower();
+            var filterText = ((TextBox)sender).Text.ToLower();
+
+            var filtered = GetFilteredResults(filterText);
+
+            FilteredItems.Clear();
+            TestView.ItemsSource = filtered;
+        }
+
+        private List<StudentSoftStock> GetFilteredResults(string filter)
+        {
             using (var context = new DormContext())
             {
-                if (filterText != null)
+                var filtered = new List<StudentSoftStock>();
+
+                filtered.AddRange(context.StudentSoftStock.Where(d =>
+                                                    d.Name.ToLower().Contains(filter) ||
+                                                    d.StudentName.ToLower().Contains(filter)));
+
+                var isNumber = int.TryParse(filter, out int filterNumber);
+
+                if (!isNumber)
                 {
-                    var klem = context.StudentSoftStock.Where(s =>
-                                                    s.Name.ToLower().Contains(filterText) ||
-                                                    s.StudentName.ToLower().Contains(filterText))
-                                                .ToList();
-                    FilteredItems.Clear();
-                    TestView.ItemsSource = klem;
+                    return filtered;
                 }
+
+                filtered.AddRange(context.StudentSoftStock.Where(d =>
+                                                    d.Id == filterNumber ||
+                                                    d.StudentId == filterNumber));
+
+                return filtered;
             }
         }
 

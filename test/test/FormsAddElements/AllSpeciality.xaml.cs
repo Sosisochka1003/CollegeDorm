@@ -131,18 +131,36 @@ namespace test
         public ObservableCollection<Speciality> FilteredItems { get; set; } = new ObservableCollection<Speciality>();
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string filterText = ((TextBox)sender).Text.ToLower();
+            var filterText = ((TextBox)sender).Text.ToLower();
+
+            var filtered = GetFilteredResults(filterText);
+
+            FilteredItems.Clear();
+            TestView.ItemsSource = filtered;
+        }
+
+        private List<Speciality> GetFilteredResults(string filter)
+        {
             using (var context = new DormContext())
             {
-                if (filterText != null)
+                var filtered = new List<Speciality>();
+
+                filtered.AddRange(context.Speciality.Where(d =>
+                                                    d.Name.ToLower().Contains(filter)));
+
+                var isNumber = int.TryParse(filter, out int filterNumber);
+
+                if (!isNumber)
                 {
-                    var klem = context.Speciality.Where(s =>
-                                                    s.Name.ToLower().Contains(filterText))
-                                                .ToList();
-                    FilteredItems.Clear();
-                    TestView.ItemsSource = klem;
+                    return filtered;
                 }
+
+                filtered.AddRange(context.Speciality.Where(d =>
+                                                    d.Id == filterNumber));
+
+                return filtered;
             }
         }
+
     }
 }

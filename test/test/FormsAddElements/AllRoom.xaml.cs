@@ -168,7 +168,38 @@ namespace test.FormsAddElements
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
+            var filterText = ((TextBox)sender).Text.ToLower();
 
+            var filtered = GetFilteredResults(filterText);
+
+            FilteredItems.Clear();
+            if (filtered.Count != 0)
+            {
+                TestView.ItemsSource = filtered;
+                return;
+            }
+            UpdateData();
+        }
+
+        private List<Room> GetFilteredResults(string filter)
+        {
+            using (var context = new DormContext())
+            {
+                var filtered = new List<Room>();
+
+
+                var isNumber = int.TryParse(filter, out int filterNumber);
+
+                filtered.AddRange(context.Room.Where(d =>
+                                                    d.Id == filterNumber ||
+                                                    d.RoomNumber == filterNumber ||
+                                                    d.Cost == filterNumber ||
+                                                    d.DormitoryId == filterNumber ||
+                                                    d.Living_space == filterNumber ||
+                                                    d.Number_of_beds== filterNumber));
+
+                return filtered;
+            }
         }
 
         private void TestView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

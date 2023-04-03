@@ -105,20 +105,42 @@ namespace test
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string filterText = ((TextBox)sender).Text.ToLower();
+            var filterText = ((TextBox)sender).Text.ToLower();
+
+            var filtered = GetFilteredResults(filterText);
+
+            FilteredItems.Clear();
+            TestViewStudents.ItemsSource = filtered;
+        }
+
+        private List<Student> GetFilteredResults(string filter)
+        {
             using (var context = new DormContext())
             {
-                var klem = context.Student.Where(s => 
-                                                    s.Name.ToLower().Contains(filterText) ||
-                                                    s.Surname.ToLower().Contains(filterText) ||
-                                                    s.Patronymic.ToLower().Contains(filterText) ||
-                                                    s.Group.Number.ToLower().Contains(filterText) ||
-                                                    s.Home_Address.ToLower().Contains(filterText) ||
-                                                    s.Form_of_education.ToLower() == filterText ||
-                                                    s.Status_residence.ToLower() == filterText)
-                                                .ToList();
-                FilteredItems.Clear();
-                TestViewStudents.ItemsSource = klem;
+                var filtered = new List<Student>();
+
+                filtered.AddRange(context.Student.Where(d =>
+                                                    d.Surname.ToLower().Contains(filter) ||
+                                                    d.Name.ToLower().Contains(filter) ||
+                                                    d.Patronymic.ToLower().Contains(filter) ||
+                                                    d.Home_Address.ToLower().Contains(filter) ||
+                                                    d.Form_of_education.ToLower().Contains(filter) ||
+                                                    d.Status_residence.ToLower().Contains(filter)));
+
+                var isNumber = int.TryParse(filter, out int filterNumber);
+
+                if (!isNumber)
+                {
+                    return filtered;
+                }
+
+                filtered.AddRange(context.Student.Where(d =>
+                                                    d.Id == filterNumber ||
+                                                    d.RoomId == filterNumber ||
+                                                    d.GroupId == filterNumber ||
+                                                    d.ParentsId == filterNumber));
+
+                return filtered;
             }
         }
 

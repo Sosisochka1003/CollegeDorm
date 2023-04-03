@@ -62,29 +62,34 @@
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
+                            IsEnabled="False"
                             Height="35"
                             Content="Обновить"
                             Click="ButtonUpdate_Click"
-                            Visibility="Hidden"
-                            Width="auto" />
+                            Visibility="Visible"
+                            Width="auto"
+                            Cursor="Hand" />
                     <Button x:Name="ButtonCancel"
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Height="35"
                             Content="Отменить"
-                            Visibility="Hidden"
+                            IsEnabled="False"
+                            Visibility="Visible"
                             Width="auto"
                             Click="ButtonCancel_Click" />
                     <Button x:Name="ButtonDelete"
                             Margin="10,3,0,0"
+                            IsEnabled="False"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Height="35"
                             Content="Удалить"
-                            Visibility="Hidden"
+                            Visibility="Visible"
                             Width="auto"
-                            Click="ButtonDelete_Click" />
+                            Click="ButtonDelete_Click"
+                            Cursor="Hand" />
 
                 </StackPanel>
             </StackPanel>
@@ -157,7 +162,7 @@
                                  Grid.Row="0"
                                  VerticalAlignment="Bottom"
                                  HorizontalAlignment="Right"
-                                 IsActive="False"
+                                 IsActive="True"
                                  Message="klema" />
     </Grid>
 </Window>

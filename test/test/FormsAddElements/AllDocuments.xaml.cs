@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -150,18 +151,36 @@ namespace test.FormsAddElements
 
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            string filterText = ((TextBox)sender).Text.ToLower();
+            var filterText = ((TextBox)sender).Text.ToLower();
+
+            var filtered = GetFilteredResults(filterText);
+
+            FilteredItems.Clear();
+            TestView.ItemsSource = filtered;
+}
+
+        private List<Document> GetFilteredResults(string filter)
+        {
             using (var context = new DormContext())
             {
-                if (filterText != null)
+                var filtered = new List<Document>();
+
+                filtered.AddRange(context.Document.Where(d =>
+                                                    d.Name.ToLower().Contains(filter) ||
+                                                    d.StudentSurname.ToLower().Contains(filter)));
+
+                var isNumber = int.TryParse(filter, out int filterNumber);
+
+                if (!isNumber)
                 {
-                    var klem = context.Document.Where(d =>
-                                                    d.Name.ToLower().Contains(filterText) ||
-                                                    d.StudentSurname.ToLower().Contains(filterText))
-                                                .ToList();
-                    FilteredItems.Clear();
-                    TestView.ItemsSource = klem;
+                    return filtered;
                 }
+
+                filtered.AddRange(context.Document.Where(d =>
+                                                    d.Id == filterNumber ||
+                                                    d.StudentId == filterNumber));
+
+                return filtered;
             }
         }
 
