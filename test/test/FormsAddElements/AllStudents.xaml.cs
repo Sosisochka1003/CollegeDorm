@@ -94,10 +94,10 @@ namespace test
                 ComboBoxFormEducation.SelectedValue = selectedItem.Form_of_education;
                 ComboBoxGroup.SelectedValue = selectedItem.GroupId;
                 ComboBoxParents.SelectedValue = selectedItem.ParentsId;
-                ButtonUpdateStudent.Visibility = Visibility.Visible;
-                ButtonCancel.Visibility = Visibility.Visible;
-                ButtonDelete.Visibility = Visibility.Visible;
-                ButtonAddStudent.Visibility = Visibility.Hidden;
+                ButtonUpdateStudent.IsEnabled = true;
+                ButtonCancel.IsEnabled = true;
+                ButtonDelete.IsEnabled = true;
+                ButtonAddStudent.IsEnabled = false;
             }
         }
 
@@ -173,9 +173,10 @@ namespace test
             ComboBoxFormEducation.SelectedValue = null;
             ComboBoxGroup.SelectedValue = null;
             ComboBoxParents.SelectedValue = null;
-            ButtonUpdateStudent.Visibility = Visibility.Hidden;
-            ButtonCancel.Visibility = Visibility.Hidden;
-            ButtonDelete.Visibility = Visibility.Hidden;
+            ButtonUpdateStudent.IsEnabled = false;
+            ButtonCancel.IsEnabled = false;
+            ButtonDelete.IsEnabled = false;
+            ButtonAddStudent.IsEnabled = true;
             SnackBar("Операция отменена");
             UpdateData();
         }
@@ -230,9 +231,9 @@ namespace test
                 ComboBoxFormEducation.SelectedValue = null;
                 ComboBoxGroup.SelectedValue = null;
                 ComboBoxParents.SelectedValue = null;
-                ButtonUpdateStudent.Visibility = Visibility.Hidden;
-                ButtonCancel.Visibility = Visibility.Hidden;
-                ButtonDelete.Visibility = Visibility.Hidden;
+                ButtonUpdateStudent.IsEnabled = false;
+                ButtonCancel.IsEnabled = false;
+                ButtonDelete.IsEnabled = false;
                 SnackBar("Запись удалена");
                 UpdateData();
             }

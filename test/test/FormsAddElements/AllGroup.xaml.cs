@@ -37,10 +37,10 @@ namespace test.FormsAddElements
         }
         private void ButtonsVisible()
         {
-            ButtonUpdate.Visibility = Visibility.Hidden;
-            ButtonCancel.Visibility = Visibility.Hidden;
-            ButtonDelete.Visibility = Visibility.Hidden;
-            ButtonAdd.Visibility = Visibility.Visible;
+            ButtonUpdate.IsEnabled = false;
+            ButtonCancel.IsEnabled = false;
+            ButtonDelete.IsEnabled = false;
+            ButtonAdd.IsEnabled = true;
         }
         public async void SnackBar(string text)
         {
@@ -189,10 +189,12 @@ namespace test.FormsAddElements
                     Speciality speciality = context.Speciality.FirstOrDefault(s => s.Id == selectedItem.SpecialityId);
                     TextBoxName.Text = selectedItem.Number;
                     ComboBoxSpeciality.Text = speciality.Name;
-                    ButtonUpdate.Visibility = Visibility.Visible;
-                    ButtonCancel.Visibility = Visibility.Visible;
-                    ButtonDelete.Visibility = Visibility.Visible;
-                    ButtonAdd.Visibility = Visibility.Hidden;
+                    ButtonUpdate.IsEnabled = true;
+                    ButtonCancel.IsEnabled = true;
+                    ButtonDelete.IsEnabled = true;
+                    ButtonAdd.IsEnabled = false;
+
+
                 }
             }
         }

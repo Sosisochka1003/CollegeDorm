@@ -162,7 +162,7 @@
                                  Grid.Row="0"
                                  VerticalAlignment="Bottom"
                                  HorizontalAlignment="Right"
-                                 IsActive="True"
+                                 IsActive="False"
                                  Message="klema" />
     </Grid>
 </Window>

@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using test.DataBaseClasses;
 using static test.DataBase;
@@ -24,16 +25,21 @@ namespace test.FormsAddElements
     public partial class AllDormitory : Window
     {
         Dormitory selectedItem = new Dormitory();
+        DormContext ctx = new DormContext();
+        List<Dormitory> dormitories;
+
         public AllDormitory()
         {
             InitializeComponent();
+            dormitories = new List<Dormitory>( ctx.Dormitory.ToList());
+            TestView.DataContext = dormitories;
         }
         private void ButtonsVisible()
         {
-            ButtonUpdate.Visibility = Visibility.Hidden;
-            ButtonCancel.Visibility = Visibility.Hidden;
-            ButtonDelete.Visibility = Visibility.Hidden;
-            ButtonAdd.Visibility = Visibility.Visible;
+            ButtonUpdate.IsEnabled = false;
+            ButtonCancel.IsEnabled = false;
+            ButtonDelete.IsEnabled = false;
+            ButtonAdd.IsEnabled = true;
         }
         public async void SnackBar(string text)
         {
@@ -161,10 +167,10 @@ namespace test.FormsAddElements
                 {
                     TextBoxAddress.Text = selectedItem.Address;
                     TextBoxCountRoom.Text = selectedItem.Numbers_of_rooms.ToString();
-                    ButtonUpdate.Visibility = Visibility.Visible;
-                    ButtonCancel.Visibility = Visibility.Visible;
-                    ButtonDelete.Visibility = Visibility.Visible;
-                    ButtonAdd.Visibility = Visibility.Hidden;
+                    ButtonUpdate.IsEnabled = true;
+                    ButtonCancel.IsEnabled = true;
+                    ButtonDelete.IsEnabled = true;
+                    ButtonAdd.IsEnabled = false;
                 }
             }
         }
@@ -173,6 +179,38 @@ namespace test.FormsAddElements
         {
             UpdateData();
             SnackBar("Данные из БД");
+        }
+
+        //private bool FilterAddress(Dormitory dorm, string address) => dorm.Address.ToLower().Contains(address.ToLower());
+
+        private List<Dormitory> FilterAddress(string address)
+        {
+            return ctx.Dormitory.Where(x => x.Address.ToLower().Contains(address.ToLower())).ToList();
+        }
+
+        private List<Dormitory> FilterNumberOfRooms(int numberOfRooms)
+        {
+            return ctx.Dormitory.Where(x => x.Numbers_of_rooms == numberOfRooms).ToList();
+        }
+
+        private void ButtonFilter_Click(object sender, RoutedEventArgs e)
+        {
+            var address = TextBoxFilterAddress.Text.ToLower();
+            var numberOfRoomsParsed = int.TryParse(address, out int numberOfRooms);
+
+            var filtered = new List<List<Dormitory>>{
+                address == "" ? FilterAddress(address) : ctx.Dormitory.ToList(),
+                numberOfRoomsParsed ? FilterNumberOfRooms(numberOfRooms) : ctx.Dormitory.ToList()
+            };
+
+            var intersection = filtered
+                .Skip(1)
+                .Aggregate(
+                    new HashSet<Dormitory>(filtered.First()),
+                    (h, e) => { h.IntersectWith(e); return h; });
+
+
+            TestView.ItemsSource = intersection;
         }
     }
 }

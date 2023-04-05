@@ -123,6 +123,11 @@ namespace test
             AllHardInventoryRoom allHardInventoryRoom = new AllHardInventoryRoom();
             allHardInventoryRoom.Show();
         }
+
+        private void ColorZone_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            MessageBox.Show("ты клема");
+        }
     }
 
 }

@@ -60,10 +60,10 @@ namespace test.FormsAddElements
         }
         private void ButtonsVisible()
         {
-            ButtonUpdate.Visibility = Visibility.Hidden;
-            ButtonCancel.Visibility = Visibility.Hidden;
-            ButtonDelete.Visibility = Visibility.Hidden;
-            ButtonAdd.Visibility = Visibility.Visible;
+            ButtonUpdate.IsEnabled = false;
+            ButtonCancel.IsEnabled = false;
+            ButtonDelete.IsEnabled = false;
+            ButtonAdd.IsEnabled = true;
         }
         public ObservableCollection<Room> FilteredItems { get; set; } = new ObservableCollection<Room>();
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
@@ -215,10 +215,10 @@ namespace test.FormsAddElements
                     ComboBoxDormitory.Text = dorm.Id.ToString();
                     TextBoxLivingSpace.Text = selectedItem.Living_space.ToString();
                     TextBoxCountBeds.Text = selectedItem.Number_of_beds.ToString();
-                    ButtonUpdate.Visibility = Visibility.Visible;
-                    ButtonCancel.Visibility = Visibility.Visible;
-                    ButtonDelete.Visibility = Visibility.Visible;
-                    ButtonAdd.Visibility = Visibility.Hidden;
+                    ButtonUpdate.IsEnabled = true;
+                    ButtonCancel.IsEnabled = true;
+                    ButtonDelete.IsEnabled = true;
+                    ButtonAdd.IsEnabled = false;
                 }
             }
                 

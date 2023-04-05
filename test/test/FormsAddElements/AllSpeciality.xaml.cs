@@ -66,15 +66,16 @@ namespace test
                 context.SaveChanges();
             }
             SnackBar("Специальность довалвена");
+            TextBoxName.Text = null;
             UpdateData();
         }
 
         private void ButtonsVisible()
         {
-            ButtonUpdate.Visibility = Visibility.Hidden;
-            ButtonCancel.Visibility = Visibility.Hidden;
-            ButtonDelete.Visibility = Visibility.Hidden;
-            ButtonAdd.Visibility = Visibility.Visible;
+            ButtonUpdate.IsEnabled = false;
+            ButtonCancel.IsEnabled = false;
+            ButtonDelete.IsEnabled = false;
+            ButtonAdd.IsEnabled = true;
         }
 
         private void ButtonUpdate_Click(object sender, RoutedEventArgs e)
@@ -122,10 +123,10 @@ namespace test
             if (selectedItem != null)
             {
                 TextBoxName.Text = selectedItem.Name;
-                ButtonUpdate.Visibility = Visibility.Visible;
-                ButtonCancel.Visibility = Visibility.Visible;
-                ButtonDelete.Visibility = Visibility.Visible;
-                ButtonAdd.Visibility = Visibility.Hidden;
+                ButtonUpdate.IsEnabled = true;
+                ButtonCancel.IsEnabled = true;
+                ButtonDelete.IsEnabled = true;
+                ButtonAdd.IsEnabled = false;
             }
         }
         public ObservableCollection<Speciality> FilteredItems { get; set; } = new ObservableCollection<Speciality>();

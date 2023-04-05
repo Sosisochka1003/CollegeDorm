@@ -1,2 +1,0 @@
-cd /d "C:\Users\gapch\OneDrive\Desktop\c#\test\test" &msbuild "test.csproj" /t:sdvViewer /p:configuration="Debug" /p:platform="Any CPU" /p:SolutionDir="C:\Users\gapch\OneDrive\Desktop\c#\test" 
-exit %errorlevel% 

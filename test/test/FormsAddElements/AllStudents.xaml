@@ -111,7 +111,7 @@
                             </Binding>
                         </ComboBox.SelectedItem>
                         <sys:String>Проживает</sys:String>
-                        <sys:String>Не проживает</sys:String>
+                        <sys:String>Не проживает</sys:String>   
                     </ComboBox>
                     <ComboBox x:Name="ComboBoxFormEducation"
                               Margin="0,0,7,0"
@@ -173,24 +173,26 @@
                             HorizontalAlignment="Left"
                             Click="ButtonAddStudent_Click"
                             Height="35"
-                            Content="Добавить студента"
+                            Content="Добавить"
                             Width="auto" />
                     <Button x:Name="ButtonUpdateStudent"
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Height="35"
-                            Content="Обновить студента"
+                            IsEnabled="False"
+                            Content="Обновить"
                             Click="ButtonUpdateStudent_Click"
-                            Visibility="Hidden"
+                            Visibility="Visible"
                             Width="auto" />
                     <Button x:Name="ButtonCancel"
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Height="35"
+                            IsEnabled="False"
                             Content="Отменить"
-                            Visibility="Hidden"
+                            Visibility="Visible"
                             Width="auto"
                             Click="ButtonCancel_Click" />
                     <Button x:Name="ButtonDelete"
@@ -198,8 +200,9 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Height="35"
+                            IsEnabled="False"
                             Content="Удалить"
-                            Visibility="Hidden"
+                            Visibility="Visible"
                             Width="auto"
                             Click="ButtonDelete_Click" />
 

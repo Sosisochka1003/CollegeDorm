@@ -17,7 +17,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
-        <StackPanel>
+        <StackPanel Margin="0,74,0,0">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top">
                 <Button x:Name="ButtonAddStudent"
@@ -64,44 +64,5 @@
                         Click="ButtonAddHardInventoryRoom_Click" />
             </StackPanel>
         </StackPanel>
-        <Button Margin="615,361,82,0"
-                Click="Button_Click_2"
-                Height="32"
-                VerticalAlignment="Top">
-            blya
-        </Button>
-        <Button Margin="352,269,335,0"
-                Click="Button_Click_1"
-                Height="auto"
-                VerticalAlignment="Top">
-            Обзор БД
-        </Button>
-        <Button Margin="550,258,138,0"
-                Click="Button_Click"
-                Height="32"
-                VerticalAlignment="Top">
-            Student
-        </Button>
-        <TextBox Margin="33,321,629,0"
-                 x:Name="textbox_name_price"
-                 BorderBrush="Red"
-                 BorderThickness="3,3,3,3"
-                 Foreground="Purple"
-                 Background="#FF72BFD4"
-                 TextWrapping="WrapWithOverflow"
-                 Height="89"
-                 VerticalAlignment="Top">
-            Введите имя студента/стоимость
-        </TextBox>
-        <TextBox Margin="214,321,432,0"
-                 x:Name="textbox_number"
-                 BorderBrush="Red"
-                 BorderThickness="3,3,3,3"
-                 Foreground="Purple"
-                 Background="#FF72BFD4"
-                 Text="Введите номер комнаты"
-                 TextWrapping="WrapWithOverflow"
-                 Height="85"
-                 VerticalAlignment="Top" />
     </Grid>
 </Window>
