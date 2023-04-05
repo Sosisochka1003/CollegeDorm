@@ -30,7 +30,8 @@ namespace test
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=123");
+                //optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=123");
+                optionsBuilder.UseNpgsql($"Host={test.Settings1.Default.Host};Port={test.Settings1.Default.Port};Database={test.Settings1.Default.DataBase};Username={test.Settings1.Default.UserName};Password={test.Settings1.Default.Password}");
             }
 
 

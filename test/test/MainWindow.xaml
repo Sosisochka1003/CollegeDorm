@@ -55,13 +55,19 @@
                         Content="Добавить мебель студента"
                         Click="ButtonAddStudentSoft_Click" />
             </StackPanel>
-            <StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Button x:Name="ButtonAddHardInventoryRoom"
                         Margin="5,5,0,0"
                         HorizontalAlignment="Left"
                         Width="240"
                         Content="Добавить мебель в комнату"
                         Click="ButtonAddHardInventoryRoom_Click" />
+                <Button x:Name="ButtonConnectBD"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        Width="240"
+                        Content="Настроить подключение к БД"
+                        Click="ButtonConnectBD_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

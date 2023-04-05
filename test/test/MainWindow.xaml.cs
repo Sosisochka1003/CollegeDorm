@@ -29,7 +29,32 @@ namespace test
         public MainWindow()
         {
             InitializeComponent();
+            if (!Settings1.Default.IsConnect)
+            {
+                ButtonAddStudent.IsEnabled = false;
+                ButtonAddSpeciality.IsEnabled = false;
+                ButtonAddGroup.IsEnabled = false;
+                ButtonAddDormitory.IsEnabled = false;
+                ButtonAddParents.IsEnabled = false;
+                ButtonAddRoom.IsEnabled = false;
+                ButtonAddDocument.IsEnabled = false;
+                ButtonAddStudentSoft.IsEnabled = false;
+                ButtonAddHardInventoryRoom.IsEnabled = false;
+            }
+            else if (Settings1.Default.IsConnect)
+            {
+                ButtonAddStudent.IsEnabled = true;
+                ButtonAddSpeciality.IsEnabled = true;
+                ButtonAddGroup.IsEnabled = true;
+                ButtonAddDormitory.IsEnabled = true;
+                ButtonAddParents.IsEnabled = true;
+                ButtonAddRoom.IsEnabled = true;
+                ButtonAddDocument.IsEnabled = true;
+                ButtonAddStudentSoft.IsEnabled = true;
+                ButtonAddHardInventoryRoom.IsEnabled = true;
+            }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -127,6 +152,12 @@ namespace test
         private void ColorZone_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             MessageBox.Show("ты клема");
+        }
+
+        private void ButtonConnectBD_Click(object sender, RoutedEventArgs e)
+        {
+            ConnectBD connectBD = new ConnectBD();
+            connectBD.Show();
         }
     }
 
