@@ -15,10 +15,6 @@ namespace test.DataBaseClasses
 {
     public class Student
     {
-        public Student()
-        {
-            
-        }
         [Key]
         public int Id { get; set; }
         [ForeignKey("Room")]

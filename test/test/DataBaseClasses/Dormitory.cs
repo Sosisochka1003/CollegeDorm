@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 
 namespace test.DataBaseClasses
 {
-
-
     public class Dormitory
     {
         [Key]
