@@ -234,6 +234,7 @@ namespace test
                 ButtonUpdateStudent.IsEnabled = false;
                 ButtonCancel.IsEnabled = false;
                 ButtonDelete.IsEnabled = false;
+                ButtonAddStudent.IsEnabled = true;
                 SnackBar("Запись удалена");
                 UpdateData();
             }
