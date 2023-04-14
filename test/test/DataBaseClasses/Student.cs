@@ -7,12 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Windows;
+using System.Windows.Media.Animation;
 using static test.DataBase;
 
 namespace test.DataBaseClasses
 {
     public class Student
     {
+        public Student()
+        {
+            
+        }
         [Key]
         public int Id { get; set; }
         [ForeignKey("Room")]
@@ -21,7 +27,7 @@ namespace test.DataBaseClasses
         public string Surname { get; set; }
         public string Name { get; set; }
         public string Patronymic { get; set; }
-        public string Home_Address{ get; set; }
+        public string Home_Address { get; set; }
         public bool Status_learning { get; set; }
         public string Form_of_education { get; set; }
         public string Status_residence { get; set; }
@@ -31,6 +37,5 @@ namespace test.DataBaseClasses
         [ForeignKey("Parents")]
         public int ParentsId { get; set; }
         public Parents Parents { get; set; }
-
     }
 }
