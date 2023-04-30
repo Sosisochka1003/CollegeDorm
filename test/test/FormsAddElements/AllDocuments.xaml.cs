@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using test.DataBaseClasses;
 using static test.DataBase;
+using System.Reflection;
 
 namespace test.FormsAddElements
 {
@@ -24,6 +25,7 @@ namespace test.FormsAddElements
     public partial class AllDocuments : Window
     {
         Document selectedItem = new Document();
+        Type typeDocument = typeof(Document);
         public AllDocuments()
         {
             InitializeComponent();
