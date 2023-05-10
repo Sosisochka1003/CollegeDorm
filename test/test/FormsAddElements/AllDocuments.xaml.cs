@@ -83,7 +83,7 @@ namespace test.FormsAddElements
                 {
                     Document doc = new Document
                     {
-                        Name = TextChecker.CheckCyrillic(TextBoxName.Text),
+                        DName = TextChecker.CheckCyrillic(TextBoxName.Text),
                         StudentId = stud.Id,
                         StudentSurname = stud.Surname,
                         Student = stud
@@ -116,7 +116,7 @@ namespace test.FormsAddElements
                             SnackBar("Неверный студент");
                             return;
                         }
-                        selectedItem.Name = TextChecker.CheckCyrillic(TextBoxName.Text);
+                        selectedItem.DName = TextChecker.CheckCyrillic(TextBoxName.Text);
                         selectedItem.StudentId = stud.Id;
                         selectedItem.StudentSurname = stud.Surname;
                         selectedItem.Student = stud;
@@ -183,7 +183,7 @@ namespace test.FormsAddElements
                 var filtered = new List<Document>();
 
                 filtered.AddRange(context.Document.Where(d =>
-                                                    d.Name.ToLower().Contains(filter) ||
+                                                    d.DName.ToLower().Contains(filter) ||
                                                     d.StudentSurname.ToLower().Contains(filter)));
 
                 var isNumber = int.TryParse(filter, out int filterNumber);
@@ -208,7 +208,7 @@ namespace test.FormsAddElements
             {
                 if (selectedItem != null)
                 {
-                    TextBoxName.Text = selectedItem.Name;
+                    TextBoxName.Text = selectedItem.DName;
                     ComboBoxStudent.Text = selectedItem.StudentId.ToString();
                     ButtonUpdate.IsEnabled = true;
                     ButtonCancel.IsEnabled = true;

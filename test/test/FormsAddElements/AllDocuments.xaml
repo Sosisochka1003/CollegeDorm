@@ -134,7 +134,7 @@
                                         DisplayMemberBinding="{Binding Id}"
                                         Width="auto" />
                         <GridViewColumn Header="Название"
-                                        DisplayMemberBinding="{Binding Name}"
+                                        DisplayMemberBinding="{Binding DName}"
                                         Width="auto" />
                         <GridViewColumn Header="Id студента"
                                         DisplayMemberBinding="{Binding StudentId}"

@@ -68,6 +68,12 @@
                         Width="240"
                         Content="Настроить подключение к БД"
                         Click="ButtonConnectBD_Click" />
+                <Button x:Name="ButtonPaymentReport"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        Width="auto"
+                        Content="Финансы"
+                        Click="ButtonPaymentReport_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

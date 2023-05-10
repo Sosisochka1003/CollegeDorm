@@ -22,6 +22,7 @@ namespace test
             public DbSet<Room> Room { get; set; }
             public DbSet<Student> Student { get; set; }
             public DbSet<HardInventoryRoom> HardInventoryRoom { get; set; }
+            public DbSet<Payment> Paymentl { get; set; }
 
             public DormContext()
             {

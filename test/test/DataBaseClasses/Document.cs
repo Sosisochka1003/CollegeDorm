@@ -14,7 +14,7 @@ namespace test.DataBaseClasses
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string DName { get; set; }
         [ForeignKey("Student")]
         public int StudentId { get; set; }
         public string StudentSurname { get; set; }

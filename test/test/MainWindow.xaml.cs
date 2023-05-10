@@ -159,6 +159,12 @@ namespace test
             ConnectBD connectBD = new ConnectBD();
             connectBD.Show();
         }
+
+        private void ButtonPaymentReport_Click(object sender, RoutedEventArgs e)
+        {
+            PaymentReport paymentReport = new PaymentReport();
+            paymentReport.Show();
+        }
     }
 
 }

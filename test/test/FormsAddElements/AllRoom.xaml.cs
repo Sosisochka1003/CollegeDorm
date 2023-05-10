@@ -221,18 +221,21 @@ namespace test.FormsAddElements
             selectedItem = (Room)TestView.SelectedItem;
             using (var context = new DormContext())
             {
-                Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.Id == selectedItem.Id);
-                if (selectedItem != null)
+                if (selectedItem != null && selectedItem.DormitoryId != null)
                 {
                     TextBoxNumber.Text = selectedItem.RoomNumber.ToString();
                     TextBoxCost.Text = selectedItem.Cost.ToString();
-                    ComboBoxDormitory.Text = dorm.Id.ToString();
+                    ComboBoxDormitory.Text = selectedItem.DormitoryId.ToString();
                     TextBoxLivingSpace.Text = selectedItem.Living_space.ToString();
                     TextBoxCountBeds.Text = selectedItem.Number_of_beds.ToString();
                     ButtonUpdate.IsEnabled = true;
                     ButtonCancel.IsEnabled = true;
                     ButtonDelete.IsEnabled = true;
                     ButtonAdd.IsEnabled = false;
+                }
+                else
+                {
+                    SnackBar("Ошибка");
                 }
             }
                 
