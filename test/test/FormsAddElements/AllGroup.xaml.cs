@@ -74,18 +74,25 @@ namespace test.FormsAddElements
                     SnackBar("Не верная специальность");
                     return;
                 }
-                Group group = new Group
+                try
                 {
-                    Number = TextBoxName.Text,
-                    SpecialityId = spec.Id,
-                    Speciality = spec
-                };
-                context.Group.Add(group);
-                context.SaveChanges();
-                SnackBar("Добавлена новая запись");
-                UpdateData();
-                TextBoxName.Text = null;
-                ComboBoxSpeciality.Text = null;
+                    Group group = new Group
+                    {
+                        Number = TextBoxName.Text,
+                        SpecialityId = spec.Id,
+                        Speciality = spec
+                    };
+                    context.Group.Add(group);
+                    context.SaveChanges();
+                    SnackBar("Добавлена новая запись");
+                    UpdateData();
+                    TextBoxName.Text = null;
+                    ComboBoxSpeciality.Text = null;
+                }
+                catch (Exception asd)
+                {
+                    SnackBar("Неверное значение");
+                }
             }
         }
 
@@ -93,26 +100,33 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    Speciality spec = context.Speciality.FirstOrDefault(s => s.Name == ComboBoxSpeciality.SelectedValue);
-                    if (spec == null)
+                    if (selectedItem != null)
                     {
-                        SnackBar("Неверная специальность");
-                        return;
+                        Speciality spec = context.Speciality.FirstOrDefault(s => s.Name == ComboBoxSpeciality.SelectedValue);
+                        if (spec == null)
+                        {
+                            SnackBar("Неверная специальность");
+                            return;
+                        }
+                        selectedItem.Number = TextBoxName.Text;
+                        selectedItem.SpecialityId = spec.Id;
+                        selectedItem.Speciality = spec;
                     }
-                    selectedItem.Number = TextBoxName.Text;
-                    selectedItem.SpecialityId = spec.Id;
-                    selectedItem.Speciality = spec;
+                    context.Group.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    TextBoxName.Text = null;
+                    ComboBoxSpeciality.Text = null;
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.Group.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                TextBoxName.Text = null;
-                ComboBoxSpeciality.Text = null;
-                UpdateData();
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверное значение");
+                }
             }
         }
 

@@ -19,6 +19,9 @@ using static test.DataBase;
 using System.Diagnostics;
 using System.Reflection;
 using Microsoft.Win32;
+using System.Net;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace test
 {
@@ -49,7 +52,7 @@ namespace test
                     ComboBoxParents.Items.Add(parents.Id);
                 }
             }
-            
+
         }
 
         public async void SnackBar(string text)
@@ -146,21 +149,67 @@ namespace test
 
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            AddStudent(TextBoxSurName.Text, TextBoxName.Text, TextBoxPatronymic.Text, TextBoxAddress.Text, CheckBoxStatusLearning.IsChecked.Value, ComboBoxFormEducation.Text, ComboBoxStatusResidence.Text, Convert.ToInt32(ComboBoxGroup.Text), Convert.ToInt32(ComboBoxParents.SelectedItem), Convert.ToInt32(ComboBoxRoom.SelectedItem));
-            TextBoxSurName.Text = null;
-            TextBoxName.Text = null;
-            TextBoxPatronymic.Text = null;
-            TextBoxAddress.Text = null;
-            CheckBoxStatusLearning.IsChecked = false;
-            ComboBoxRoom.SelectedValue = null;
-            ComboBoxStatusResidence.SelectedValue = null;
-            ComboBoxFormEducation.SelectedValue = null;
-            ComboBoxGroup.SelectedValue = null;
-            ComboBoxParents.SelectedValue = null;
-            SnackBar("Студент добавлен");
-            UpdateData();
-        }
+            using (var context = new DormContext())
+            {
+                try
+                {
+                    Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.Text));
+                    if (room == null)
+                    {
+                        SnackBar($"Room {ComboBoxRoom.Text} not found.");
+                        return;
+                    }
+                    DataBaseClasses.Group group = context.Group.FirstOrDefault(g => g.Id == Convert.ToInt32(ComboBoxGroup.Text));
+                    if (group == null)
+                    {
+                        SnackBar($"Group {ComboBoxGroup.Text} not found.");
+                        return;
+                    }
+                    Parents parents = context.Parents.FirstOrDefault(p => p.Id == Convert.ToInt32(ComboBoxParents.Text));
+                    if (parents == null)
+                    {
+                        SnackBar($"Parent {ComboBoxParents.Text} not found.");
+                        return;
+                    }
 
+                    var student = new Student
+                    {
+                        Surname = TextChecker.CheckCyrillic(TextBoxSurName.Text),
+                        Name = TextChecker.CheckCyrillic(TextBoxName.Text),
+                        Patronymic = TextChecker.CheckCyrillic(TextBoxPatronymic.Text),
+                        Home_Address = TextBoxAddress.Text,
+                        Status_learning = CheckBoxStatusLearning.IsChecked.Value,
+                        Form_of_education = ComboBoxFormEducation.Text,
+                        Status_residence = ComboBoxStatusResidence.Text,
+                        GroupId = group.Id,
+                        Group = group,
+                        ParentsId = parents.Id,
+                        Parents = parents,
+                        RoomId = room.Id,
+                        Room = room
+                    };
+
+                    context.Student.Add(student);
+                    context.SaveChanges();
+                    TextBoxSurName.Text = null;
+                    TextBoxName.Text = null;
+                    TextBoxPatronymic.Text = null;
+                    TextBoxAddress.Text = null;
+                    CheckBoxStatusLearning.IsChecked = false;
+                    ComboBoxRoom.SelectedValue = null;
+                    ComboBoxStatusResidence.SelectedValue = null;
+                    ComboBoxFormEducation.SelectedValue = null;
+                    ComboBoxGroup.SelectedValue = null;
+                    ComboBoxParents.SelectedValue = null;
+                    SnackBar("Студент добавлен");
+                    UpdateData();
+                }
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
+            }
+        }
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)
         {
             TextBoxSurName.Text = null;
@@ -185,33 +234,40 @@ namespace test
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.Text));
-                    Group group = context.Group.FirstOrDefault(g => g.Id == Convert.ToInt32(ComboBoxGroup.Text));
-                    Parents parents = context.Parents.FirstOrDefault(p => p.Id == Convert.ToInt32(ComboBoxParents.Text));
-                    if (room == null || group == null || parents == null)
+                    if (selectedItem != null)
                     {
-                        SnackBar("Неверные данные");
-                        return;
+                        Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.Text));
+                        DataBaseClasses.Group group = context.Group.FirstOrDefault(g => g.Id == Convert.ToInt32(ComboBoxGroup.Text));
+                        Parents parents = context.Parents.FirstOrDefault(p => p.Id == Convert.ToInt32(ComboBoxParents.Text));
+                        if (room == null || group == null || parents == null)
+                        {
+                            SnackBar("Неверные данные");
+                            return;
+                        }
+                        selectedItem.Surname = TextChecker.CheckCyrillic(TextBoxSurName.Text);
+                        selectedItem.Name = TextChecker.CheckCyrillic(TextBoxName.Text);
+                        selectedItem.Patronymic = TextChecker.CheckCyrillic(TextBoxPatronymic.Text);
+                        selectedItem.Home_Address = TextBoxAddress.Text;
+                        selectedItem.Status_learning = CheckBoxStatusLearning.IsChecked.Value;
+                        selectedItem.RoomId = Convert.ToInt32(ComboBoxRoom.Text);
+                        selectedItem.Room = room;
+                        selectedItem.Status_residence = ComboBoxStatusResidence.Text;
+                        selectedItem.Form_of_education = ComboBoxFormEducation.Text;
+                        selectedItem.GroupId = Convert.ToInt32(ComboBoxGroup.Text);
+                        selectedItem.ParentsId = Convert.ToInt32(ComboBoxParents.Text);
                     }
-                    selectedItem.Surname = TextBoxSurName.Text;
-                    selectedItem.Name = TextBoxName.Text;
-                    selectedItem.Patronymic = TextBoxPatronymic.Text;
-                    selectedItem.Home_Address = TextBoxAddress.Text;
-                    selectedItem.Status_learning = CheckBoxStatusLearning.IsChecked.Value;
-                    selectedItem.RoomId = Convert.ToInt32(ComboBoxRoom.Text);
-                    selectedItem.Room = room;
-                    selectedItem.Status_residence = ComboBoxStatusResidence.Text;
-                    selectedItem.Form_of_education = ComboBoxFormEducation.Text;
-                    selectedItem.GroupId = Convert.ToInt32(ComboBoxGroup.Text);
-                    selectedItem.ParentsId = Convert.ToInt32(ComboBoxParents.Text);
+                    context.Student.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.Student.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                UpdateData();
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 
@@ -239,6 +295,5 @@ namespace test
                 UpdateData();
             }
         }
-    }
-
+    } 
 }

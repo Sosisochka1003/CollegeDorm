@@ -66,17 +66,25 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                Dormitory dorm = new Dormitory
+                try
                 {
-                    Address = TextBoxAddress.Text,
-                    Numbers_of_rooms = Convert.ToInt32(TextBoxCountRoom.Text),
-                };
-                context.Dormitory.Add(dorm);
-                context.SaveChanges();
-                SnackBar("Добавлена новая запись");
-                UpdateData();
-                TextBoxAddress.Text = null;
-                TextBoxCountRoom.Text = null;
+                    Dormitory dorm = new Dormitory
+                    {
+                        Address = TextBoxAddress.Text,
+                        Numbers_of_rooms = TextChecker.CheckInt(TextBoxCountRoom.Text),
+                    };
+                    context.Dormitory.Add(dorm);
+                    context.SaveChanges();
+                    SnackBar("Добавлена новая запись");
+                    UpdateData();
+                    TextBoxAddress.Text = null;
+                    TextBoxCountRoom.Text = null;
+                }
+                catch (Exception asdad)
+                {
+
+                    SnackBar("Неверное значение");
+                }
             }
         }
 
@@ -84,20 +92,29 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    selectedItem.Address = TextBoxAddress.Text;
-                    selectedItem.Numbers_of_rooms = Convert.ToInt32(TextBoxCountRoom.Text);
+                    if (selectedItem != null)
+                    {
+                        selectedItem.Address = TextBoxAddress.Text;
+                        selectedItem.Numbers_of_rooms = TextChecker.CheckInt(TextBoxCountRoom.Text);
+                    }
+                    context.Dormitory.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    TextBoxAddress.Text = null;
+                    TextBoxCountRoom.Text = null;
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.Dormitory.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                TextBoxAddress.Text = null;
-                TextBoxCountRoom.Text = null;
-                UpdateData();
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверное значение");
+                }
             }
+
+            
         }
 
         private void ButtonCancel_Click(object sender, RoutedEventArgs e)

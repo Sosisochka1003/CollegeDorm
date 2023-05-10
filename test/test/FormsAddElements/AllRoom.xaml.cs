@@ -76,24 +76,31 @@ namespace test.FormsAddElements
                     SnackBar("Не верное общежитие");
                     return;
                 }
-                Room room = new Room
+                try
                 {
-                    RoomNumber = Convert.ToInt32(TextBoxNumber.Text),
-                    Cost = Convert.ToInt32(TextBoxCost.Text),
-                    DormitoryId = Convert.ToInt32(ComboBoxDormitory.SelectedValue),
-                    Dormitory = dorm,
-                    Living_space = Convert.ToInt32(TextBoxLivingSpace.Text),
-                    Number_of_beds = Convert.ToInt32(TextBoxCountBeds.Text)
-                };
-                context.Room.Add(room);
-                context.SaveChanges();
-                SnackBar("Добавлена новая запись");
-                UpdateData();
-                TextBoxNumber.Text = null;
-                TextBoxCost.Text = null;
-                ComboBoxDormitory.Text = null;
-                TextBoxLivingSpace.Text = null;
-                TextBoxCountBeds.Text = null;
+                    Room room = new Room
+                    {
+                        RoomNumber = TextChecker.CheckInt(TextBoxNumber.Text),
+                        Cost = TextChecker.CheckInt(TextBoxCost.Text),
+                        DormitoryId = Convert.ToInt32(ComboBoxDormitory.SelectedValue),
+                        Dormitory = dorm,
+                        Living_space = TextChecker.CheckInt(TextBoxLivingSpace.Text),
+                        Number_of_beds = TextChecker.CheckInt(TextBoxCountBeds.Text)
+                    };
+                    context.Room.Add(room);
+                    context.SaveChanges();
+                    SnackBar("Добавлена новая запись");
+                    UpdateData();
+                    TextBoxNumber.Text = null;
+                    TextBoxCost.Text = null;
+                    ComboBoxDormitory.Text = null;
+                    TextBoxLivingSpace.Text = null;
+                    TextBoxCountBeds.Text = null;
+                }
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 
@@ -101,33 +108,40 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.Id == Convert.ToInt32(ComboBoxDormitory.Text));
-                    if (dorm == null)
+                    if (selectedItem != null)
                     {
-                        SnackBar("Неверное общежитие");
-                        return;
-                    }
-                    selectedItem.RoomNumber = Convert.ToInt32(TextBoxNumber.Text);
-                    selectedItem.Cost = Convert.ToInt32(TextBoxCost.Text);
-                    selectedItem.DormitoryId = dorm.Id;
-                    selectedItem.Dormitory = dorm;
-                    selectedItem.Living_space = Convert.ToInt32(TextBoxLivingSpace.Text);
-                    selectedItem.Number_of_beds = Convert.ToInt32(TextBoxCountBeds.Text);
+                        Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.Id == Convert.ToInt32(ComboBoxDormitory.Text));
+                        if (dorm == null)
+                        {
+                            SnackBar("Неверное общежитие");
+                            return;
+                        }
+                        selectedItem.RoomNumber = TextChecker.CheckInt(TextBoxNumber.Text);
+                        selectedItem.Cost = TextChecker.CheckInt(TextBoxCost.Text);
+                        selectedItem.DormitoryId = dorm.Id;
+                        selectedItem.Dormitory = dorm;
+                        selectedItem.Living_space = TextChecker.CheckInt(TextBoxLivingSpace.Text);
+                        selectedItem.Number_of_beds = TextChecker.CheckInt(TextBoxCountBeds.Text);
 
+                    }
+                    context.Room.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    UpdateData();
+                    TextBoxNumber.Text = null;
+                    TextBoxCost.Text = null;
+                    ComboBoxDormitory.Text = null;
+                    TextBoxLivingSpace.Text = null;
+                    TextBoxCountBeds.Text = null;
+                    selectedItem = null;
                 }
-                context.Room.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                UpdateData();
-                TextBoxNumber.Text = null;
-                TextBoxCost.Text = null;
-                ComboBoxDormitory.Text = null;
-                TextBoxLivingSpace.Text = null;
-                TextBoxCountBeds.Text = null;
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 

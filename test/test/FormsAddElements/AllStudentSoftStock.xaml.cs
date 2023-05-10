@@ -74,21 +74,28 @@ namespace test.FormsAddElements
                     SnackBar("Неверный студент");
                     return;
                 }
-                StudentSoftStock soft = new StudentSoftStock
+                try
                 {
-                    Name = TextBoxName.Text,
-                    StudentId = stud.Id,
-                    StudentName = stud.Surname,
-                    student = stud,
-                    Date_issue = DateOnly.FromDateTime((DateTime)DatePickerDateIssue.SelectedDate),
-                };
-                context.StudentSoftStock.Add(soft);
-                context.SaveChanges();
-                SnackBar("Добавлена новая запись");
-                UpdateData();
-                TextBoxName.Text = null;
-                ComboBoxStudent.Text = null;
-                DatePickerDateIssue.Text = null;
+                    StudentSoftStock soft = new StudentSoftStock
+                    {
+                        Name = TextChecker.CheckCyrillic(TextBoxName.Text),
+                        StudentId = stud.Id,
+                        StudentName = stud.Surname,
+                        student = stud,
+                        Date_issue = DateOnly.FromDateTime((DateTime)DatePickerDateIssue.SelectedDate),
+                    };
+                    context.StudentSoftStock.Add(soft);
+                    context.SaveChanges();
+                    SnackBar("Добавлена новая запись");
+                    UpdateData();
+                    TextBoxName.Text = null;
+                    ComboBoxStudent.Text = null;
+                    DatePickerDateIssue.Text = null;
+                }
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 
@@ -96,28 +103,35 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    Student stud = context.Student.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxStudent.SelectedValue));
-                    if (stud == null)
+                    if (selectedItem != null)
                     {
-                        SnackBar("Неверный студент");
-                        return;
+                        Student stud = context.Student.FirstOrDefault(s => s.Id == Convert.ToInt32(ComboBoxStudent.SelectedValue));
+                        if (stud == null)
+                        {
+                            SnackBar("Неверный студент");
+                            return;
+                        }
+                        selectedItem.Name = TextChecker.CheckCyrillic(TextBoxName.Text);
+                        selectedItem.StudentId = stud.Id;
+                        selectedItem.StudentName = stud.Surname;
+                        selectedItem.student = stud;
+                        selectedItem.Date_issue = DateOnly.FromDateTime((DateTime)DatePickerDateIssue.SelectedDate);
                     }
-                    selectedItem.Name = TextBoxName.Text;
-                    selectedItem.StudentId = stud.Id;
-                    selectedItem.StudentName = stud.Surname;
-                    selectedItem.student = stud;
-                    selectedItem.Date_issue = DateOnly.FromDateTime((DateTime)DatePickerDateIssue.SelectedDate);
+                    context.StudentSoftStock.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    TextBoxName.Text = null;
+                    ComboBoxStudent.Text = null;
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.StudentSoftStock.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                TextBoxName.Text = null;
-                ComboBoxStudent.Text = null;
-                UpdateData();
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 

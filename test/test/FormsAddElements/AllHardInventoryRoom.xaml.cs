@@ -74,20 +74,27 @@ namespace test.FormsAddElements
                     SnackBar("Неверная комната");
                     return;
                 }
-                HardInventoryRoom hard = new HardInventoryRoom
+                try
                 {
-                    Name = TextBoxName.Text,
-                    RoomId = room.Id,
-                    Room = room,
-                    Date_purchase = DateOnly.FromDateTime((DateTime)DatePickerDatePurchase.SelectedDate),
-                };
-                context.HardInventoryRoom.Add(hard);
-                context.SaveChanges();
-                SnackBar("Добавлена новая запись");
-                UpdateData();
-                TextBoxName.Text = null;
-                ComboBoxRoom.Text = null;
-                DatePickerDatePurchase.Text = null;
+                    HardInventoryRoom hard = new HardInventoryRoom
+                    {
+                        Name = TextBoxName.Text,
+                        RoomId = room.Id,
+                        Room = room,
+                        Date_purchase = DateOnly.FromDateTime((DateTime)DatePickerDatePurchase.SelectedDate),
+                    };
+                    context.HardInventoryRoom.Add(hard);
+                    context.SaveChanges();
+                    SnackBar("Добавлена новая запись");
+                    UpdateData();
+                    TextBoxName.Text = null;
+                    ComboBoxRoom.Text = null;
+                    DatePickerDatePurchase.Text = null;
+                }
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 
@@ -95,27 +102,34 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.SelectedValue));
-                    if (room == null)
+                    if (selectedItem != null)
                     {
-                        SnackBar("Неверная комната");
-                        return;
+                        Room room = context.Room.FirstOrDefault(r => r.Id == Convert.ToInt32(ComboBoxRoom.SelectedValue));
+                        if (room == null)
+                        {
+                            SnackBar("Неверная комната");
+                            return;
+                        }
+                        selectedItem.Name = TextBoxName.Text;
+                        selectedItem.RoomId = room.Id;
+                        selectedItem.Room = room;
+                        selectedItem.Date_purchase = DateOnly.FromDateTime((DateTime)DatePickerDatePurchase.SelectedDate);
                     }
-                    selectedItem.Name = TextBoxName.Text;
-                    selectedItem.RoomId = room.Id;
-                    selectedItem.Room = room;
-                    selectedItem.Date_purchase = DateOnly.FromDateTime((DateTime)DatePickerDatePurchase.SelectedDate);
+                    context.HardInventoryRoom.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    TextBoxName.Text = null;
+                    ComboBoxRoom.Text = null;
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.HardInventoryRoom.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                TextBoxName.Text = null;
-                ComboBoxRoom.Text = null;
-                UpdateData();
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 

@@ -56,18 +56,26 @@ namespace test
 
         private void ButtonAdd_Click(object sender, RoutedEventArgs e)
         {
-            var addspec = new Speciality
+            try
             {
-                Name = TextBoxName.Text,
-            };
-            using (var context = new DormContext())
-            {
-                context.Speciality.Add(addspec);
-                context.SaveChanges();
+                var addspec = new Speciality
+                {
+                    Name = TextChecker.CheckCyrillic(TextBoxName.Text),
+                };
+                using (var context = new DormContext())
+                {
+                    context.Speciality.Add(addspec);
+                    context.SaveChanges();
+                }
+                SnackBar("Специальность довалвена");
+                TextBoxName.Text = null;
+                UpdateData();
             }
-            SnackBar("Специальность довалвена");
-            TextBoxName.Text = null;
-            UpdateData();
+            catch (Exception)
+            {
+
+                SnackBar("Неверные данные");
+            }
         }
 
         private void ButtonsVisible()
@@ -82,17 +90,24 @@ namespace test
         {
             using(var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    selectedItem.Name = TextBoxName.Text;
+                    if (selectedItem != null)
+                    {
+                        selectedItem.Name = TextChecker.CheckCyrillic(TextBoxName.Text);
+                    }
+                    context.Speciality.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    TextBoxName.Text = null;
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.Speciality.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                TextBoxName.Text = null;
-                UpdateData();
-                selectedItem = null;
+                catch (Exception)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 

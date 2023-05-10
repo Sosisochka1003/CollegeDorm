@@ -61,19 +61,26 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                Parents par = new Parents
+                try
                 {
-                    Mother = TextBoxMother.Text,
-                    Father = TextBoxFather.Text,
-                    Marriage = CheckBoxStatusMarriage.IsChecked.Value
-                };
-                context.Parents.Add(par);
-                context.SaveChanges();
-                SnackBar("Добавлена новая запись");
-                UpdateData();
-                TextBoxMother.Text = null;
-                TextBoxFather.Text = null;
-                CheckBoxStatusMarriage.IsChecked = false;
+                    Parents par = new Parents
+                    {
+                        Mother = TextChecker.CheckCyrillic(TextBoxMother.Text),
+                        Father = TextChecker.CheckCyrillic(TextBoxFather.Text),
+                        Marriage = CheckBoxStatusMarriage.IsChecked.Value
+                    };
+                    context.Parents.Add(par);
+                    context.SaveChanges();
+                    SnackBar("Добавлена новая запись");
+                    UpdateData();
+                    TextBoxMother.Text = null;
+                    TextBoxFather.Text = null;
+                    CheckBoxStatusMarriage.IsChecked = false;
+                }
+                catch (Exception asd)
+                {
+                    SnackBar("Неверные данные");
+                }
             }
         }
 
@@ -81,21 +88,28 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                if (selectedItem != null)
+                try
                 {
-                    selectedItem.Mother = TextBoxMother.Text;
-                    selectedItem.Father = TextBoxFather.Text;
-                    selectedItem.Marriage = CheckBoxStatusMarriage.IsChecked.Value;
+                    if (selectedItem != null)
+                    {
+                        selectedItem.Mother = TextBoxMother.Text;
+                        selectedItem.Father = TextBoxFather.Text;
+                        selectedItem.Marriage = CheckBoxStatusMarriage.IsChecked.Value;
+                    }
+                    context.Parents.Update(selectedItem);
+                    context.SaveChanges();
+                    SnackBar("Обновление данных");
+                    ButtonsVisible();
+                    TextBoxMother.Text = null;
+                    TextBoxFather.Text = null;
+                    CheckBoxStatusMarriage.IsChecked = false;
+                    UpdateData();
+                    selectedItem = null;
                 }
-                context.Parents.Update(selectedItem);
-                context.SaveChanges();
-                SnackBar("Обновление данных");
-                ButtonsVisible();
-                TextBoxMother.Text = null;
-                TextBoxFather.Text = null;
-                CheckBoxStatusMarriage.IsChecked = false;
-                UpdateData();
-                selectedItem = null;
+                catch (Exception asd)
+                {
+                    SnackBar("Неверное значение");
+                }
             }
         }
 
