@@ -74,6 +74,12 @@
                         Width="auto"
                         Content="Финансы"
                         Click="ButtonPaymentReport_Click" />
+                <Button x:Name="ButtonRevenueReport"
+                        Margin="5,5,0,0"
+                        HorizontalAlignment="Left"
+                        Width="auto"
+                        Content="Заработок"
+                        Click="ButtonRevenueReport_Click" />
             </StackPanel>
         </StackPanel>
     </Grid>

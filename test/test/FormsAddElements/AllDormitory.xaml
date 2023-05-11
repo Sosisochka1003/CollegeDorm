@@ -167,7 +167,7 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Id"
-                                        DisplayMemberBinding="{Binding Id}"
+                                        DisplayMemberBinding="{Binding DId}"
                                         Width="auto" />
                         <GridViewColumn Header="Адрес"
                                         DisplayMemberBinding="{Binding Address}"

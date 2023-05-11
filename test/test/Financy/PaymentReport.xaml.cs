@@ -50,7 +50,6 @@ namespace test.FormsAddElements
                               };
                 foreach (var item in payment)
                 {
-                    //MessageBox.Show($"Фамилия:{item.Surname}\nИмя:{item.Name}\nНомер комнаты:{item.RoomNumber}\nСтоимость комнаты:{item.Cost}\nОплата комнаты:{item.Pay}");
                     Payment payment1 = new Payment
                     {
                         SurName = item.Surname,
@@ -68,7 +67,7 @@ namespace test.FormsAddElements
             
         }
 
-        static private string IsKvit(string Dname)
+        static public string IsKvit(string Dname)
         {
             Regex regex = new Regex("[КкВвИиТтАаНнЦцИиЯя]*");
             MatchCollection matchCollection = regex.Matches(Dname);
@@ -120,11 +119,6 @@ namespace test.FormsAddElements
 
             FilteredItems.Clear();
             TestView.ItemsSource = filtered;
-        }
-
-        private void TestView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
         }
     }
 }

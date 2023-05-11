@@ -23,6 +23,7 @@ namespace test
             public DbSet<Student> Student { get; set; }
             public DbSet<HardInventoryRoom> HardInventoryRoom { get; set; }
             public DbSet<Payment> Paymentl { get; set; }
+            public DbSet<Revenue> Revenues { get; set; }
 
             public DormContext()
             {
@@ -39,136 +40,6 @@ namespace test
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
                 base.OnModelCreating(modelBuilder);
-
-                //modelBuilder.Entity<Group>()
-                 //   .HasKey(g => g.Number);
-                //modelBuilder.Entity<Student>()
-                //    .HasOne(s => s.Room)
-                //    .WithMany(r => r.Students)
-                //    .HasForeignKey(s => s.RoomId)
-                //    .OnDelete(DeleteBehavior.Cascade)
-                //    .HasForeignKey(s => s.Id_group)
-                //    .HasForeignKey(s => s.Id_parents);
-
-            }
-        }
-
-        public static void AddStudent(string surname, string name, string patronymic, string address, bool statusLearning, string formEducation, string statusResidence, int GroupId, int Parentsid, int RoomId)
-        {
-            using (var context = new DormContext())
-            {
-                Room room = context.Room.FirstOrDefault(r => r.Id == RoomId);
-                if (room == null)
-                {
-                    MessageBox.Show($"Room {RoomId} not found.");
-                    return;
-                }
-                Group group = context.Group.FirstOrDefault(g => g.Id == GroupId);
-                if (group == null)
-                {
-                    MessageBox.Show($"Group {GroupId} not found.");
-                    return;
-                }
-                Parents parents = context.Parents.FirstOrDefault(p => p.Id == Parentsid);
-                if (parents == null)
-                {
-                    MessageBox.Show($"Parent {Parentsid} not found.");
-                    return;
-                }
-
-                var student = new Student
-                {
-                    Surname = surname,
-                    Name = name,
-                    Patronymic = patronymic,
-                    Home_Address = address,
-                    Status_learning = statusLearning,
-                    Form_of_education = formEducation,
-                    Status_residence = statusResidence,
-                    GroupId = GroupId,
-                    Group = group,
-                    ParentsId = parents.Id,
-                    Parents = parents,
-                    RoomId = room.Id,
-                    Room = room
-                };
-
-                context.Student.Add(student);
-                context.SaveChanges();
-            }
-        }
-
-        public static void AddRoom(int roomNumber, decimal cost)
-        {
-            using (var context = new DormContext())
-            {
-                var room = new Room
-                {
-                    RoomNumber = roomNumber,
-                    Cost = cost
-                };
-
-                context.Room.Add(room);
-                context.SaveChanges();
-            }
-        }
-
-        public static void ListStudents()
-        {
-            using (var context = new DormContext())
-            {
-                var students = context.Student.Include(s => s.Room).ToList();
-                MessageBox.Show("Students:");
-                foreach (var student in students)
-                {
-                    MessageBox.Show($"{student.Name} - Room {student.Room.RoomNumber}");
-                }
-            }
-        }
-
-        public static void ListRoom()
-        {
-            using (var context = new DormContext())
-            {
-                var Room = context.Room.ToList();
-                MessageBox.Show("Room:");
-                foreach (var room in Room)
-                {
-                    MessageBox.Show($"Room {room.RoomNumber} - Cost: {room.Cost:C}");
-                }
-            }
-        }
-
-        //public static void ListStudentsInRoom(int roomId)
-        //{
-        //    using (var context = new DormContext())
-        //    {
-        //        var room = context.Room.Include(r => r.Students).FirstOrDefault(r => r.Id == roomId);
-        //        if (room == null)
-        //        {
-        //            MessageBox.Show($"Room {roomId} not found.");
-        //            return;
-        //        }
-
-        //        MessageBox.Show($"Students in Room {room.RoomNumber}:");
-        //        foreach (var student in room.Students)
-        //        {
-        //            MessageBox.Show(student.Name);
-        //        }
-        //    }
-        //}
-
-        public static void GetRoomCost(int roomId)
-        {
-            using (var context = new DormContext())
-            {
-                var room = context.Room.FirstOrDefault(r => r.Id == roomId);
-                if (room == null)
-                {
-                    MessageBox.Show($"Room {roomId} not found.");
-                    return;
-                }
-                MessageBox.Show($"This room {roomId} is worth {room.Cost}");
             }
         }
     }

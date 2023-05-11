@@ -14,7 +14,7 @@ namespace test.DataBaseClasses
     public class Dormitory
     {
         [Key]
-        public int Id { get; set; }
+        public int DId { get; set; }
         public string Address { get; set; }
         public int Numbers_of_rooms { get; set; }
     }

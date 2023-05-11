@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using test.DataBaseClasses;
+using test.Financy;
 using test.FormsAddElements;
 using static test.DataBase;
 
@@ -53,46 +54,6 @@ namespace test
                 ButtonAddStudentSoft.IsEnabled = true;
                 ButtonAddHardInventoryRoom.IsEnabled = true;
             }
-        }
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            using (DormContext db = new DormContext())
-            {
-                Speciality speciality = new Speciality() { Id = 1, Name = "Информациооные системы" };
-                Speciality speciality1 = new Speciality() { Id = 2, Name = "Юристы" };
-                Group group = new Group() { Id = 1, Number = "ИС1-20", SpecialityId = 1, Speciality = speciality };
-                Group group1 = new Group() { Id = 2, Number = "Ю1-21", SpecialityId = 2, Speciality = speciality1 };
-                Parents parents = new Parents() { Id = 1, Father = "Никита", Mother = "Миша", Marriage = true };
-                Parents parents1 = new Parents() { Id = 2, Father = "За хлебом", Mother = "Женя", Marriage = false };
-                Dormitory dormitory = new Dormitory() { Id = 1, Address = "Королёв", Numbers_of_rooms = 20 };
-                Room room = new Room() { Id = 1, RoomNumber = 1, Cost = 3000, DormitoryId = 1, Dormitory = dormitory, Living_space = 30, Number_of_beds = 50 };
-                db.Speciality.Add(speciality);
-                db.Speciality.Add(speciality1);
-                db.Group.Add(group);
-                db.Group.Add(group1);
-                db.Parents.Add(parents);
-                db.Parents.Add(parents1);
-                db.Dormitory.Add(dormitory);
-                db.Room.Add(room);
-                db.SaveChanges();
-
-            }
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
         }
 
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
@@ -149,11 +110,6 @@ namespace test
             allHardInventoryRoom.Show();
         }
 
-        private void ColorZone_ContextMenuOpening(object sender, ContextMenuEventArgs e)
-        {
-            MessageBox.Show("ты клема");
-        }
-
         private void ButtonConnectBD_Click(object sender, RoutedEventArgs e)
         {
             ConnectBD connectBD = new ConnectBD();
@@ -164,6 +120,12 @@ namespace test
         {
             PaymentReport paymentReport = new PaymentReport();
             paymentReport.Show();
+        }
+
+        private void ButtonRevenueReport_Click(object sender, RoutedEventArgs e)
+        {
+            RevenueReport revenueReport = new RevenueReport();
+            revenueReport.Show();
         }
     }
 

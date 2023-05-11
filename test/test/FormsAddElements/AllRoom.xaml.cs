@@ -32,7 +32,7 @@ namespace test.FormsAddElements
                 var dorm = context.Dormitory.ToList();
                 foreach (var item in dorm)
                 {
-                    ComboBoxDormitory.Items.Add(item.Id);
+                    ComboBoxDormitory.Items.Add(item.DId);
                 }
             }
 
@@ -70,7 +70,7 @@ namespace test.FormsAddElements
         {
             using (var context = new DormContext())
             {
-                Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.Id == Convert.ToInt32(ComboBoxDormitory.SelectedValue));
+                Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.DId == Convert.ToInt32(ComboBoxDormitory.SelectedValue));
                 if (dorm == null)
                 {
                     SnackBar("Не верное общежитие");
@@ -112,7 +112,7 @@ namespace test.FormsAddElements
                 {
                     if (selectedItem != null)
                     {
-                        Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.Id == Convert.ToInt32(ComboBoxDormitory.Text));
+                        Dormitory dorm = context.Dormitory.FirstOrDefault(d => d.DId == Convert.ToInt32(ComboBoxDormitory.Text));
                         if (dorm == null)
                         {
                             SnackBar("Неверное общежитие");
@@ -120,7 +120,7 @@ namespace test.FormsAddElements
                         }
                         selectedItem.RoomNumber = TextChecker.CheckInt(TextBoxNumber.Text);
                         selectedItem.Cost = TextChecker.CheckInt(TextBoxCost.Text);
-                        selectedItem.DormitoryId = dorm.Id;
+                        selectedItem.DormitoryId = dorm.DId;
                         selectedItem.Dormitory = dorm;
                         selectedItem.Living_space = TextChecker.CheckInt(TextBoxLivingSpace.Text);
                         selectedItem.Number_of_beds = TextChecker.CheckInt(TextBoxCountBeds.Text);

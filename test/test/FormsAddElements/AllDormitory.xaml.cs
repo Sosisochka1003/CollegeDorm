@@ -168,7 +168,7 @@ namespace test.FormsAddElements
                 }
 
                 filtered.AddRange(context.Dormitory.Where(d =>
-                                                    d.Id == filterNumber ||
+                                                    d.DId == filterNumber ||
                                                     d.Numbers_of_rooms == filterNumber));
 
                 return filtered;

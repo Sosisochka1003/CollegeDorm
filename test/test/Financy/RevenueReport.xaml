@@ -1,13 +1,12 @@
-﻿<Window x:Class="test.FormsAddElements.PaymentReport"
+﻿<Window x:Class="test.Financy.RevenueReport"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:test.FormsAddElements"
+        xmlns:local="clr-namespace:test.Financy"
         mc:Ignorable="d"
-        Title="PaymentReport" MinHeight="450" Width="800" MaxWidth="800">
-    
+        Title="RevenueReport" Height="450" MinWidth="850">
     <Grid Name="ListStudent"
           Margin="0,5,0,0"
               Grid.Row="1">
@@ -22,6 +21,7 @@
                 Обновить
             </Button>
             <TextBox x:Name="TextBoxSearch"
+                     Margin="5,5,5,0"
                          Padding="9,9,9,9"
                          Height="auto"
                          VerticalAlignment="Top"
@@ -33,27 +33,52 @@
                          TextChanged="TextBoxSearch_TextChanged"
                          Width="112"
                          materialDesign:TextFieldAssist.HasClearButton="True" />
+            <TextBox x:Name="TextBoxTotal"
+                         Margin="5,5,5,0"
+                         Padding="9,9,9,9"
+                         Height="auto"
+                         IsEnabled="False"
+                         VerticalAlignment="Top"
+                         materialDesign:HintAssist.Hint=""
+                         AcceptsReturn="True"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         TextChanged="TextBoxSearch_TextChanged"
+                         Width="150"/>
+            <TextBox x:Name="TextBoxNow"
+                         Padding="9,9,9,9"
+                         Margin="5,5,5,0"
+                         Height="auto"
+                         IsEnabled="False"
+                         VerticalAlignment="Top"
+                         materialDesign:HintAssist.Hint=""
+                         AcceptsReturn="True"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         TextChanged="TextBoxSearch_TextChanged"
+                         Width="150"/>
         </StackPanel>
         <ListView x:Name="TestView"
                       HorizontalContentAlignment="Stretch"
                       MinWidth="80"
                       MinHeight="25"
                       Margin="0,41,0,0"
-                      ItemsSource="{Binding Payment}"
-                      MouseDoubleClick="TestView_MouseDoubleClick">
+                      ItemsSource="{Binding Revenue}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Фамилия"
-                                        DisplayMemberBinding="{Binding SurName}"
-                                        Width="auto" />
-                    <GridViewColumn Header="Имя"
-                                        DisplayMemberBinding="{Binding Name}"
+                    <GridViewColumn Header="Код Общежития"
+                                        DisplayMemberBinding="{Binding DormitoryID}"
                                         Width="auto" />
                     <GridViewColumn Header="Номер комнаты"
                                         DisplayMemberBinding="{Binding RoomNumber}"
                                         Width="auto" />
-                    <GridViewColumn Header="Стоимость"
-                                        DisplayMemberBinding="{Binding Cost}"
+                    <GridViewColumn Header="Стоимость комнаты"
+                                        DisplayMemberBinding="{Binding RoomCost}"
+                                        Width="auto" />
+                    <GridViewColumn Header="Код Студента"
+                                        DisplayMemberBinding="{Binding StudentID}"
                                         Width="auto" />
                     <GridViewColumn Header="Оплачена"
                                         DisplayMemberBinding="{Binding isPaid}"
