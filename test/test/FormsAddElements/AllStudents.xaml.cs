@@ -34,6 +34,7 @@ namespace test
         public AllStudents()
         {
             InitializeComponent();
+            UpdateData();
             using (var context = new DormContext())
             {
                 var gr = context.Group.ToList();

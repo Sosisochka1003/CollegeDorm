@@ -29,6 +29,7 @@ namespace test.FormsAddElements
         public AllDocuments()
         {
             InitializeComponent();
+            UpdateData();
             using (var context = new DormContext())
             {
                 var stud = context.Student.ToList();

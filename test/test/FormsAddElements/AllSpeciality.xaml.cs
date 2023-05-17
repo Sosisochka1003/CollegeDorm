@@ -26,6 +26,7 @@ namespace test
         public AllSpeciality()
         {
             InitializeComponent();
+            UpdateData();
         }
         public async void SnackBar(string text)
         {

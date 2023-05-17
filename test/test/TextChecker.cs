@@ -26,7 +26,7 @@ namespace test
 
         static public string CheckCyrillic(string text)
         {
-            Regex regex = new Regex("[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя]*");
+            Regex regex = new Regex("[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя ]*");
             MatchCollection matches = regex.Matches(text);
             if (matches[0].ToString() == text)
             {

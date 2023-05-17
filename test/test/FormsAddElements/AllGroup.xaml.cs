@@ -26,6 +26,7 @@ namespace test.FormsAddElements
         public AllGroup()
         {
             InitializeComponent();
+            UpdateData();
             using (var context = new DormContext())
             {
                 var spec = context.Speciality.ToList();

@@ -26,6 +26,7 @@ namespace test.FormsAddElements
         public AllHardInventoryRoom()
         {
             InitializeComponent();
+            UpdateData();
             using (var context = new DormContext())
             {
                 var room = context.Room.ToList();

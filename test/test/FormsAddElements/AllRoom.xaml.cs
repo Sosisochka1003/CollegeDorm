@@ -27,6 +27,7 @@ namespace test.FormsAddElements
         public AllRoom()
         {
             InitializeComponent();
+            UpdateData();
             using (var context = new DormContext())
             {
                 var dorm = context.Dormitory.ToList();

@@ -27,6 +27,7 @@ namespace test.FormsAddElements
         public AllParents()
         {
             InitializeComponent();
+            UpdateData();
         }
         private void ButtonsVisible()
         {

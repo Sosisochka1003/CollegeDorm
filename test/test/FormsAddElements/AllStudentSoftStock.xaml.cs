@@ -26,6 +26,7 @@ namespace test.FormsAddElements
         public AllStudentSoftStock()
         {
             InitializeComponent();
+            UpdateData();
             using (var context = new DormContext())
             {
                 var stud = context.Student.ToList();

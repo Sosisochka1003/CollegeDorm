@@ -31,6 +31,7 @@ namespace test.FormsAddElements
         public AllDormitory()
         {
             InitializeComponent();
+            UpdateData();
             dormitories = new List<Dormitory>( ctx.Dormitory.ToList());
             TestView.DataContext = dormitories;
         }
@@ -198,36 +199,5 @@ namespace test.FormsAddElements
             SnackBar("Данные из БД");
         }
 
-        //private bool FilterAddress(Dormitory dorm, string address) => dorm.Address.ToLower().Contains(address.ToLower());
-
-        private List<Dormitory> FilterAddress(string address)
-        {
-            return ctx.Dormitory.Where(x => x.Address.ToLower().Contains(address.ToLower())).ToList();
-        }
-
-        private List<Dormitory> FilterNumberOfRooms(int numberOfRooms)
-        {
-            return ctx.Dormitory.Where(x => x.Numbers_of_rooms == numberOfRooms).ToList();
-        }
-
-        private void ButtonFilter_Click(object sender, RoutedEventArgs e)
-        {
-            var address = TextBoxFilterAddress.Text.ToLower();
-            var numberOfRoomsParsed = int.TryParse(address, out int numberOfRooms);
-
-            var filtered = new List<List<Dormitory>>{
-                address == "" ? FilterAddress(address) : ctx.Dormitory.ToList(),
-                numberOfRoomsParsed ? FilterNumberOfRooms(numberOfRooms) : ctx.Dormitory.ToList()
-            };
-
-            var intersection = filtered
-                .Skip(1)
-                .Aggregate(
-                    new HashSet<Dormitory>(filtered.First()),
-                    (h, e) => { h.IntersectWith(e); return h; });
-
-
-            TestView.ItemsSource = intersection;
-        }
     }
 }

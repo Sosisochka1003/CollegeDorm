@@ -6,19 +6,20 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="AllDocuments" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <StackPanel Orientation="Vertical"
+    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Vertical"
                         Margin="0,0,0,0">
-                <StackPanel x:Name="StackPanelAdd"
+                    <StackPanel x:Name="StackPanelAdd"
                             Orientation="Horizontal"
                             Margin="5,35,0,5">
-                    <TextBox x:Name="TextBoxName"
+                        <TextBox x:Name="TextBoxName"
                              Margin="3,0,7,0"
                              Padding="9,9,9,9"
                              Height="auto"
@@ -30,7 +31,7 @@
                              VerticalScrollBarVisibility="Auto"
                              Width="160"
                              materialDesign:TextFieldAssist.HasClearButton="True" />
-                    <ComboBox x:Name="ComboBoxStudent"
+                        <ComboBox x:Name="ComboBoxStudent"
                               Margin="0,0,7,0"
                               Padding="9,9,9,9"
                               MinWidth="140"
@@ -40,18 +41,18 @@
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               ItemsSource="{Binding ShortStringList}"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}" />
-                </StackPanel>
-                <StackPanel x:Name="StackPanelButtonAddStudent"
+                    </StackPanel>
+                    <StackPanel x:Name="StackPanelButtonAddStudent"
                             Height="53"
                             Orientation="Horizontal">
-                    <Button x:Name="ButtonAdd"
+                        <Button x:Name="ButtonAdd"
                             Margin="10,3,0,0"
                             HorizontalAlignment="Left"
                             Click="ButtonAdd_Click"
                             Height="35"
                             Content="Добавить"
                             Width="auto" />
-                    <Button x:Name="ButtonUpdate"
+                        <Button x:Name="ButtonUpdate"
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             IsEnabled="False"
@@ -61,7 +62,7 @@
                             Click="ButtonUpdate_Click"
                             Visibility="Visible"
                             Width="auto" />
-                    <Button x:Name="ButtonCancel"
+                        <Button x:Name="ButtonCancel"
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             IsEnabled="False"
@@ -71,7 +72,7 @@
                             Visibility="Visible"
                             Width="auto"
                             Click="ButtonCancel_Click" />
-                    <Button x:Name="ButtonDelete"
+                        <Button x:Name="ButtonDelete"
                             Margin="10,3,0,0"
                             VerticalAlignment="Center"
                             IsEnabled="False"
@@ -82,9 +83,9 @@
                             Width="auto"
                             Click="ButtonDelete_Click" />
 
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-            <TextBlock Style="{DynamicResource MaterialDesignTextBlock}"
+                <TextBlock Style="{DynamicResource MaterialDesignTextBlock}"
                        Text=""
                        Margin="0,4,0,0"
                        Height="26"
@@ -92,23 +93,23 @@
                        HorizontalAlignment="Center"
                        Width="auto">
             Добавление документов
-            </TextBlock>
-        </Grid>
+                </TextBlock>
+            </Grid>
 
 
-        <Grid Name="ListStudent"
+            <Grid Name="ListStudent"
               Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonRefresh"
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ButtonRefresh"
                         Margin="5,5,5,0"
                         Click="ButtonRefresh_Click"
                         Height="auto"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Width="auto">
-                    Обновить
-                </Button>
-                <TextBox x:Name="TextBoxSearch"
+                        Обновить
+                    </Button>
+                    <TextBox x:Name="TextBoxSearch"
                          Padding="9,9,9,9"
                          Height="auto"
                          VerticalAlignment="Top"
@@ -120,38 +121,40 @@
                          TextChanged="TextBoxSearch_TextChanged"
                          Width="112"
                          materialDesign:TextFieldAssist.HasClearButton="True" />
-            </StackPanel>
-            <ListView x:Name="TestView"
+                </StackPanel>
+                <ListView x:Name="TestView"
                       HorizontalContentAlignment="Stretch"
                       MinWidth="80"
                       MinHeight="25"
                       Margin="0,41,0,0"
                       ItemsSource="{Binding Document}"
                       MouseDoubleClick="TestView_MouseDoubleClick">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Id"
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Код"
                                         DisplayMemberBinding="{Binding Id}"
                                         Width="auto" />
-                        <GridViewColumn Header="Название"
+                            <GridViewColumn Header="Название"
                                         DisplayMemberBinding="{Binding DName}"
                                         Width="auto" />
-                        <GridViewColumn Header="Id студента"
+                            <GridViewColumn Header="Id студента"
                                         DisplayMemberBinding="{Binding StudentId}"
                                         Width="auto" />
-                        <GridViewColumn Header="Фамилия"
+                            <GridViewColumn Header="Фамилия"
                                         DisplayMemberBinding="{Binding StudentSurname}"
                                         Width="auto" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>
-        <materialDesign:Snackbar x:Name="SnackbarOne"
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <materialDesign:Snackbar x:Name="SnackbarOne"
                                  Margin="0,0,10,0"
                                  Grid.Row="0"
                                  VerticalAlignment="Bottom"
                                  HorizontalAlignment="Right"
                                  IsActive="False"
                                  Message="klema" />
-    </Grid>
+        </Grid>
+    </ScrollViewer>
+    
 </Window>

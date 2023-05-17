@@ -253,7 +253,7 @@
                       MouseDoubleClick="TestViewStudents_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Id"
+                        <GridViewColumn Header="Код"
                                         DisplayMemberBinding="{Binding Id}"
                                         Width="auto" />
                         <GridViewColumn Header="Комната"

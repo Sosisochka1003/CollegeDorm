@@ -30,6 +30,11 @@ namespace test
         public MainWindow()
         {
             InitializeComponent();
+            using (var context = new DormContext())
+            {
+                context.Student.ToList();
+            }
+
             if (!Settings1.Default.IsConnect)
             {
                 ButtonAddStudent.IsEnabled = false;
@@ -55,7 +60,7 @@ namespace test
                 ButtonAddHardInventoryRoom.IsEnabled = true;
             }
         }
-
+        
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
         {
             AllStudents stud = new AllStudents();

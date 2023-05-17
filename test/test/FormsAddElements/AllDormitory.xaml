@@ -123,40 +123,6 @@
                          TextChanged="TextBoxSearch_TextChanged"
                          Width="112"
                          materialDesign:TextFieldAssist.HasClearButton="True" />
-                <TextBox x:Name="TextBoxFilterAddress"
-                         Margin="3,0,7,0"
-                         Padding="9,9,9,9"
-                         Height="auto"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Hint="Адрес"
-                         AcceptsReturn="True"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Width="181"
-                         materialDesign:TextFieldAssist.HasClearButton="True"
-                          />
-                <TextBox x:Name="TextBoxFilterCountRoom"
-                         Margin="3,0,7,0"
-                         Padding="9,9,9,9"
-                         Height="auto"
-                         VerticalAlignment="Top"
-                         materialDesign:HintAssist.Hint="Кол-во комнат"
-                         AcceptsReturn="True"
-                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         Width="144"
-                         materialDesign:TextFieldAssist.HasClearButton="True"
-                          />
-                <Button x:Name="ButtonFilter"
-                        Margin="5,5,5,0"
-                        Click="ButtonFilter_Click"
-                        Height="auto"
-                        Content="Отфильтровать"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Width="auto" />
             </StackPanel>
             <ListView x:Name="TestView"
                       HorizontalContentAlignment="Stretch"
@@ -166,7 +132,7 @@
                       MouseDoubleClick="TestView_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Id"
+                        <GridViewColumn Header="Код"
                                         DisplayMemberBinding="{Binding DId}"
                                         Width="auto" />
                         <GridViewColumn Header="Адрес"
