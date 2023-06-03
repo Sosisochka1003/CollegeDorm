@@ -61,6 +61,34 @@ namespace test
             }
         }
         
+        private void SwitchMenu(string Menu)
+        {
+            switch (Menu)
+            {
+                case "Student":
+                {
+                    GridStudent.Visibility = Visibility.Visible;
+                    GridRoom.Visibility = Visibility.Hidden;
+                    GridReport.Visibility = Visibility.Hidden;
+                    break;
+                }
+                case "Room":
+                {
+                    GridStudent.Visibility = Visibility.Hidden;
+                    GridRoom.Visibility = Visibility.Visible;
+                    GridReport.Visibility = Visibility.Hidden;
+                    break;
+                }
+                case "Report":
+                {
+                    GridStudent.Visibility = Visibility.Hidden;
+                    GridRoom.Visibility = Visibility.Hidden;
+                    GridReport.Visibility = Visibility.Visible;
+                    break;
+                }
+            }
+        }
+
         private void ButtonAddStudent_Click(object sender, RoutedEventArgs e)
         {
             AllStudents stud = new AllStudents();
@@ -131,6 +159,26 @@ namespace test
         {
             RevenueReport revenueReport = new RevenueReport();
             revenueReport.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AllMenu.Visibility = Visibility.Hidden;
+        }
+
+        private void ButtonMenuStudent_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchMenu("Student");
+        }
+
+        private void ButtonMenuRoom_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchMenu("Room");
+        }
+
+        private void ButtonMenuReport_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchMenu("Report");
         }
     }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:test"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Главное меню"
         Height="450"
         Width="800"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,63 +16,69 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <StackPanel Margin="0,74,0,0">
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top">
-                <Button x:Name="ButtonAddStudent"
+    <Grid x:Name="AllMenu">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button x:Name="ButtonMenuStudent" Margin="5,5,0,0" Click="ButtonMenuStudent_Click">Студенты</Button>
+            <Button x:Name="ButtonMenuRoom" Margin="5,5,0,0" Click="ButtonMenuRoom_Click">Комнаты</Button>
+            <Button x:Name="ButtonMenuReport" Margin="5,5,0,0" Click="ButtonMenuReport_Click">Финансы</Button>
+        </StackPanel>
+        <Grid x:Name="GridStudent" Visibility="Hidden">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ButtonAddStudent"
                         Margin="5,5,0,0"
                         Content="Добавить студента"
                         Click="ButtonAddStudent_Click" />
-                <Button x:Name="ButtonAddSpeciality"
+                    <Button x:Name="ButtonAddSpeciality"
                         Margin="5,5,0,0"
                         Content="Добавить специальность"
                         Click="ButtonAddSpeciality_Click" />
-                <Button x:Name="ButtonAddGroup"
+                    <Button x:Name="ButtonAddGroup"
                         Margin="5,5,0,0"
                         Content="Добавить группу"
                         Click="ButtonAddGroup_Click" />
+                    <Button x:Name="ButtonAddParents"
+                        Margin="5,5,0,0"
+                        Content="Добавить родителей"
+                        Click="ButtonAddParents_Click" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="ButtonAddDocument"
+                        Margin="5,5,0,0"
+                        Content="Добавить документы"
+                        Click="ButtonAddDocument_Click" />
+                    <Button x:Name="ButtonAddStudentSoft"
+                        Margin="5,5,0,0"
+                        Content="Добавить мебель студента"
+                        Click="ButtonAddStudentSoft_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GridRoom" Visibility="Hidden">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button x:Name="ButtonAddDormitory"
                         Margin="5,5,0,0"
                         Content="Добавить общежитие"
                         Click="ButtonAddDormitory_Click" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="ButtonAddParents"
-                        Margin="5,5,0,0"
-                        Content="Добавить родителей"
-                        Click="ButtonAddParents_Click" />
                 <Button x:Name="ButtonAddRoom"
                         Margin="5,5,0,0"
                         Content="Добавить комнату"
                         Click="ButtonAddRoom_Click" />
-                <Button x:Name="ButtonAddDocument"
-                        Margin="5,5,0,0"
-                        Content="Добавить документы"
-                        Click="ButtonAddDocument_Click" />
-                <Button x:Name="ButtonAddStudentSoft"
-                        Margin="5,5,0,0"
-                        Content="Добавить мебель студента"
-                        Click="ButtonAddStudentSoft_Click" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
                 <Button x:Name="ButtonAddHardInventoryRoom"
                         Margin="5,5,0,0"
                         HorizontalAlignment="Left"
                         Width="240"
                         Content="Добавить мебель в комнату"
                         Click="ButtonAddHardInventoryRoom_Click" />
-                <Button x:Name="ButtonConnectBD"
-                        Margin="5,5,0,0"
-                        HorizontalAlignment="Left"
-                        Width="240"
-                        Content="Настроить подключение к БД"
-                        Click="ButtonConnectBD_Click" />
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GridReport" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
                 <Button x:Name="ButtonPaymentReport"
                         Margin="5,5,0,0"
                         HorizontalAlignment="Left"
                         Width="auto"
-                        Content="Финансы"
+                        Content="Оплата комнат"
                         Click="ButtonPaymentReport_Click" />
                 <Button x:Name="ButtonRevenueReport"
                         Margin="5,5,0,0"
@@ -81,6 +87,13 @@
                         Content="Заработок"
                         Click="ButtonRevenueReport_Click" />
             </StackPanel>
-        </StackPanel>
+        </Grid>
+        <Button x:Name="ButtonConnectBD"
+                        VerticalAlignment="Bottom"
+                        Margin="5,5,0,10"
+                        HorizontalAlignment="Center"
+                        Width="240"
+                        Content="Настроить подключение к БД"
+                        Click="ButtonConnectBD_Click" />
     </Grid>
 </Window>

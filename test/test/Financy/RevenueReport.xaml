@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:test.Financy"
         mc:Ignorable="d"
-        Title="RevenueReport" Height="450" MinWidth="850">
+        Title="Финансовый отчет" Height="450" MinWidth="850">
     <Grid Name="ListStudent"
           Margin="0,5,0,0"
               Grid.Row="1">

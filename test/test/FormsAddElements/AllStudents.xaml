@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AllStudents"
+        Title="Студенты"
         MinHeight="400"
         MinWidth="1500"
         Height="auto"

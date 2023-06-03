@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:test.FormsAddElements"
         mc:Ignorable="d"
-        Title="PaymentReport" MinHeight="450" Width="800" MaxWidth="800">
+        Title="Отчет по оплате комнат" MinHeight="450" Width="800" MaxWidth="800">
     
     <Grid Name="ListStudent"
           Margin="0,5,0,0"

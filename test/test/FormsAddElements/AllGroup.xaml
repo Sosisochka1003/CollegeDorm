@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:test.FormsAddElements"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="AllGroup" Height="450" Width="800">
+        Title="Группы" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
